@@ -1,8 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import NavBar from "./components/Nav/NavBar";
 import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from "@material-ui/core";
+import SideBar from "./components/Side/SideBar"
+import NavBar from "./components/Nav/NavBar";
 
 const theme = createTheme({
   status: {
@@ -17,6 +18,10 @@ const theme = createTheme({
       main: '#64748B',
       contrastText: '#fff',
     },
+    secondary: {
+      main: '#c7c7c7',
+      light: '#ffffff',
+    },
   },
 });
 
@@ -25,6 +30,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div>
         <NavBar />
+        <SideBar color={theme.primary} />
         <Routes>
           <Route exact path="./"></Route>
         </Routes>

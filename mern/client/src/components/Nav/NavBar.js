@@ -1,16 +1,16 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core"
+import { AppBar, Toolbar, Typography, Grid } from "@material-ui/core"
 
-const Navbar = () => {
+const NavBar = () => {
     return (
         <div>
             <nav className="navbar">
                 <AppBar>
                     <Toolbar>
-                        <Grid xs="auto" direction="row" justifyContent="space-between" container>
-                            <Grid item><Typography>News Aggregator</Typography></Grid>
-                            <Grid item><Button flex="2" color="primary" variant="contained">Login</Button></Grid>
+                        <Grid direction="row" justify="space-between" container>
+                            <Grid item>
+                                <Typography variant="h6">News Aggregator</Typography>
+                            </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
@@ -19,4 +19,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default NavBar;
