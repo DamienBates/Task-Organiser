@@ -1,19 +1,35 @@
 import React from "react";
-
-// We use Route in order to define the different routes of our application
 import { Routes, Route } from "react-router-dom";
+import NavBar from "./components/Nav/NavBar";
+import { ThemeProvider } from "@material-ui/styles";
+import { createTheme } from "@material-ui/core";
 
-// We import all the components we need in our app
-import Navbar from "./components/navbar";
+const theme = createTheme({
+  status: {
+    danger: '#e53e3e',
+  },
+  palette: {
+    primary: {
+      main: '#1b1b1b',
+      light: '#6d6d6d',
+    },
+    neutral: {
+      main: '#64748B',
+      contrastText: '#fff',
+    },
+  },
+});
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route exact path="/"></Route>
-      </Routes>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route exact path="./"></Route>
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 };
 
