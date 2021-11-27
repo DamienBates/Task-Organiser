@@ -10,9 +10,7 @@ export const UseListItem = (props) => {
             <List>
                 {[name].map((text) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>
-                            {icon}
-                        </ListItemIcon>
+                        <ListItemIcon>{icon}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@material-ui/core'
 
-export const Starred = () => {
+export const Trending = () => {
     return (
         <Box ml={28} mt={-3.5} mr={1}>
             <Typography paragraph>
@@ -14,4 +14,4 @@ export const Starred = () => {
     )
 }
 
-export default Starred
+export default Trending
