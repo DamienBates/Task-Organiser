@@ -3,7 +3,7 @@ import { Box, Typography } from '@material-ui/core'
 
 export const Trending = () => {
     return (
-        <Box ml={28} mt={-3.5} mr={1}>
+        <Box>
             <Typography paragraph>
                 You are on the starred component asdfas asdfasdf
             </Typography >

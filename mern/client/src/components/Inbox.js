@@ -3,7 +3,7 @@ import { Box, Typography } from '@material-ui/core'
 
 export const Inbox = () => {
     return (
-        <Box ml={28} mt={-3.5} mr={1}>
+        <Box>
             <Typography paragraph >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac mattis eros.
                 Aenean ac felis id dolor scelerisque mattis. Morbi tellus risus, auctor ut neque quis, faucibus facilisis urna.

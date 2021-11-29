@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Routes, Router } from "react-router";
-import Drawer from "./components/Drawer";
+import { Route, Routes } from "react-router";
+import ClippedDrawer from "./components/ClippedDrawer";
 import Inbox from "./components/Inbox";
 import Trending from "./components/Trending";
 import Home from "./components/Home";
@@ -33,14 +33,16 @@ const App = () => {
   return (
     <section>
       <ThemeProvider theme={Theme}>
-        <Drawer />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/Inbox" element={<Inbox />}></Route>
-          <Route path="/Trending" element={<Trending />}></Route>
-        </Routes>
+        <ClippedDrawer />
+        <div style={{ marginLeft: '205px', marginTop: '23px' }}>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/Inbox" element={<Inbox />}></Route>
+            <Route path="/Trending" element={<Trending />}></Route>
+          </Routes>
+        </div>
       </ThemeProvider>
-    </section>
+    </section >
   );
 };
 

@@ -11,7 +11,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import LoginIcon from '@mui/icons-material/Login';
 import UseListItem from './UseListItem';
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 
 export default function ClippedDrawer() {
   return (
@@ -48,23 +48,26 @@ export default function ClippedDrawer() {
       >
         <Toolbar />
         <Box
-          mt={0.4}
+          mt={0.41}
           sx={{ overflow: 'auto' }}>
-          <UseListItem
-            link='Inbox'
+          {<UseListItem
+            link=''
             name='Home'
             icon={<MailIcon />}
-          />
-          <UseListItem
+          />}
+          {<UseListItem
             link="Trending"
             name="Trending"
             icon={<InboxIcon />}
-          />
+          />}
+          {<UseListItem
+            link='Inbox'
+            name='Inbox'
+            icon={<MailIcon />}
+          />}
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-      </Box>
+      <Toolbar />
     </Box >
   );
 }

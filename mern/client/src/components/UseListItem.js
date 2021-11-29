@@ -15,7 +15,7 @@ export const UseListItem = (props) => {
                     </ListItem>
                 ))}
             </List>
-        </Link >
+        </Link>
     )
 }
 
