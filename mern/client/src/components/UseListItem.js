@@ -1,4 +1,3 @@
-import React from 'react'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { Link } from 'react-router-dom'
 
@@ -6,7 +5,7 @@ export const UseListItem = (props) => {
     const { name, icon, link } = props;
 
     return (
-        <Link to={`/${link}`}>
+        <Link to={`/${link}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <List>
                 {[name].map((text) => (
                     <ListItem button key={text}>

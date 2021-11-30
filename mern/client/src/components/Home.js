@@ -4,9 +4,7 @@ import { Box, Typography } from '@material-ui/core'
 
 export const Home = () => {
     return (
-        <Box sx={{
-            width: 'auto'
-        }}>
+        <Box>
             <Typography paragraph>
                 Hello, you are on the homepage
             </Typography>

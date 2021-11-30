@@ -3,8 +3,8 @@ import React from 'react'
 
 const Login = () => {
     return (
-        <Paper sx={{ padding: 4 }}>
-            <FormControl ml={28} mt={-3.5} mr={1}>
+        <Paper>
+            <FormControl>
                 <InputLabel htmlFor="my-input">Email address</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
                 <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
