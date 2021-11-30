@@ -10,7 +10,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import LoginIcon from '@mui/icons-material/Login';
 import UseListItem from './UseListItem';
 
-const drawerWidth = 180;
+const drawerWidth = 170;
 
 export default function ClippedDrawer() {
   return (

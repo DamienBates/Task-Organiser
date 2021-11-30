@@ -4,12 +4,12 @@ import Inbox from "./components/Inbox";
 import Trending from "./components/Trending";
 import Home from "./components/Home";
 import { ThemeProvider } from "@emotion/react";
-import Theme from "./components/Theme";
+import CustomTheme from "./components/CustomTheme";
 
 const App = () => {
   return (
     <section>
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={CustomTheme}>
         <ClippedDrawer />
         <div style={{ marginLeft: '205px', marginTop: '23px' }}>
           <Routes>
