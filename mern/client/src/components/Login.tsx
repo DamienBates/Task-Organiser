@@ -1,5 +1,4 @@
 import { Paper, FormControl, InputLabel, Input, FormHelperText } from '@mui/material'
-import React from 'react'
 
 const Login = () => {
     return (

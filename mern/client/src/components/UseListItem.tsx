@@ -1,7 +1,7 @@
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-export const UseListItem = (props) => {
+export const UseListItem = (props: { name: string; icon: any; link: string; }) => {
     const { name, icon, link } = props;
 
     return (
