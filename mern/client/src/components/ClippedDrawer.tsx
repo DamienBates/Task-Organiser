@@ -10,7 +10,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import LoginIcon from '@mui/icons-material/Login';
 import UseListItem from './UseListItem';
 
-const drawerWidth = 170;
+const drawerWidth = 190;
 
 export default function ClippedDrawer() {
   return (
@@ -26,13 +26,10 @@ export default function ClippedDrawer() {
           <Grid container justifyContent='flex-end'>
             <Button
               endIcon={<LoginIcon />}
-              href='./Login'
-              onClick={() => {
-                return (alert('Hi, stop clicking me'));
-              }}
+              href='./Create'
               variant="contained"
             >
-              Login
+              Create User
             </Button>
           </Grid>
         </Toolbar>
@@ -62,6 +59,11 @@ export default function ClippedDrawer() {
           {<UseListItem
             link='Inbox'
             name='Inbox'
+            icon={<MailIcon />}
+          />}
+          {<UseListItem
+            link='Record'
+            name='User List'
             icon={<MailIcon />}
           />}
         </Box>
