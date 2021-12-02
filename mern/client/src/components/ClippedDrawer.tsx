@@ -26,7 +26,7 @@ export default function ClippedDrawer() {
           <Grid container justifyContent='flex-end'>
             <Button
               endIcon={<LoginIcon />}
-              href='./Create'
+              href='./CreateNewRecord'
               variant="contained"
             >
               Create User
