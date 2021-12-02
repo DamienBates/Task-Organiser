@@ -97,7 +97,7 @@ export default class CreateNewRecord extends Component<{}, any> {
                             >
                             </TextField>
                         </Grid>
-                        <Grid item sx={{ mt: '30px' }}>
+                        <Grid item sx={{ mt: '50px' }}>
                             <FormLabel component="legend" color='secondary' sx={{ mb: '8px' }}>Experience Level:</FormLabel>
                             <RadioGroup
                                 aria-label="Experience"
@@ -109,7 +109,7 @@ export default class CreateNewRecord extends Component<{}, any> {
                                 <FormControlLabel value='Senior' control={<Radio />} label="Senior" />
                             </RadioGroup>
                         </Grid>
-                        <Button sx={{ mt: '20px' }} variant="contained" endIcon={<SendIcon />} type='submit' onSubmit={this.onSubmit}>
+                        <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onSubmit={this.onSubmit}>
                             Submit
                         </Button>
                     </Grid>

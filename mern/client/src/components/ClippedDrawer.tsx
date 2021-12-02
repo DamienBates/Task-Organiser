@@ -5,12 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Grid, Button } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import LoginIcon from '@mui/icons-material/Login';
 import UseListItem from './UseListItem';
+import HomeIcon from '@mui/icons-material/Home';
+import CallIcon from '@mui/icons-material/Call';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 
-const drawerWidth = 190;
+const drawerWidth = 180;
 
 export default function ClippedDrawer() {
   return (
@@ -44,30 +46,26 @@ export default function ClippedDrawer() {
       >
         <Toolbar />
         <Box
-          mt={0.41}
+          mt='10px'
+          ml='10px'
           sx={{ overflow: 'auto' }}>
           {<UseListItem
             link=''
             name='Home'
-            icon={<MailIcon />}
+            icon={<HomeIcon />}
           />}
           {<UseListItem
-            link="Trending"
-            name="Trending"
-            icon={<InboxIcon />}
-          />}
-          {<UseListItem
-            link='Inbox'
-            name='Inbox'
-            icon={<MailIcon />}
+            link='AboutUs'
+            name='Contact'
+            icon={<CallIcon />}
           />}
           {<UseListItem
             link='Record'
-            name='User List'
-            icon={<MailIcon />}
+            name='Visitors'
+            icon={<DirectionsRunIcon />}
           />}
         </Box>
-      </Drawer>
+      </Drawer >
       <Toolbar />
     </Box >
   );

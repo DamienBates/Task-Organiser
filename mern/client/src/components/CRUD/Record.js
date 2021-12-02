@@ -2,8 +2,9 @@ import { Component } from "react";
 // This will require to npm install axios
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { Table, Typography, TableHead, TableRow } from "@mui/material";
 
-const Record = (props: { type: any }) => (
+const Record = (props) => (
     <tr>
         <td>{props.record.person_name}</td>
         <td>{props.record.person_position}</td>
@@ -70,6 +71,18 @@ export default class RecordList extends Component {
     render() {
         return (
             <div>
+                <>
+                    <Typography variant='h5'>
+                        Site Visitors
+                    </Typography>
+                    <Table stickyHeader>
+                        <TableHead id='Name'>
+                            <TableRow>
+                                {this.recordList()}
+                            </TableRow>
+                        </TableHead>
+                    </Table>
+                </>
                 <h3>Record List</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
