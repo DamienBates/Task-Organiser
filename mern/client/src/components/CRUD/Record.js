@@ -34,7 +34,7 @@ export default class RecordList extends Component {
     // This method will get the data from the database.
     componentDidMount() {
         axios
-            .get("http://localhost:5000/record/")
+            .get("http://localhost:5000/Record/")
             .then((response) => {
                 this.setState({ records: response.data });
             })
@@ -82,6 +82,7 @@ export default class RecordList extends Component {
                             </TableRow>
                         </TableHead>
                     </Table>
+
                 </>
                 <h3>Record List</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }}>

@@ -19,7 +19,6 @@ const withRouter = (Component) => {
 };
 
 class Edit extends Component {
-    // This is the constructor that stores the data.
     constructor(props) {
         super(props);
 
@@ -35,7 +34,7 @@ class Edit extends Component {
             records: [],
         };
     }
-    // This will get the record based on the id from the database.
+
     componentDidMount() {
         axios
             .get("http://localhost:5000/record/" + this.props.match.params.id)
@@ -51,7 +50,6 @@ class Edit extends Component {
             });
     }
 
-    // These methods will update the state properties.
     onChangePersonName(e) {
         this.setState({
             person_name: e.target.value,
@@ -70,7 +68,6 @@ class Edit extends Component {
         });
     }
 
-    // This function will handle the submission.
     onSubmit(e) {
         e.preventDefault();
         const newEditedperson = {
@@ -80,7 +77,6 @@ class Edit extends Component {
         };
         console.log(newEditedperson);
 
-        // This will send a post request to update the data in the database.
         axios
             .post(
                 "http://localhost:5000/update/" + this.props.match.params.id,
@@ -91,7 +87,6 @@ class Edit extends Component {
         this.props.history.push("/");
     }
 
-    // This following section will display the update-form that takes the input from the user to update the data.
     render() {
         return (
             <div>

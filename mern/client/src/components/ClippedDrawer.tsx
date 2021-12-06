@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Grid, Button } from '@mui/material';
-import MailIcon from '@mui/icons-material/Mail';
 import LoginIcon from '@mui/icons-material/Login';
 import UseListItem from './UseListItem';
 import HomeIcon from '@mui/icons-material/Home';
@@ -49,21 +48,21 @@ export default function ClippedDrawer() {
           mt='10px'
           ml='10px'
           sx={{ overflow: 'auto' }}>
-          {<UseListItem
+          <UseListItem
             link=''
             name='Home'
             icon={<HomeIcon />}
-          />}
-          {<UseListItem
+          />
+          <UseListItem
             link='AboutUs'
             name='Contact'
             icon={<CallIcon />}
-          />}
-          {<UseListItem
+          />
+          <UseListItem
             link='Record'
             name='Visitors'
             icon={<DirectionsRunIcon />}
-          />}
+          />
         </Box>
       </Drawer >
       <Toolbar />

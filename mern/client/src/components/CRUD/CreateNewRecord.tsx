@@ -6,7 +6,6 @@ import { Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
 export default class CreateNewRecord extends Component<{}, any> {
-    // This is the constructor that stores the data.
     constructor(props: { value: any; }) {
         super(props);
 
@@ -22,7 +21,6 @@ export default class CreateNewRecord extends Component<{}, any> {
         };
     }
 
-    // These methods will update the state properties.
     onChangePersonName(e: { target: { value: any; }; }) {
         this.setState({
             person_name: e.target.value,
@@ -41,11 +39,9 @@ export default class CreateNewRecord extends Component<{}, any> {
         });
     }
 
-    // This function will handle the submission.
     onSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
 
-        // When post request is sent to the create url, axios will add a new record(newperson) to the database.
         const newperson = {
             person_name: this.state.person_name,
             person_position: this.state.person_position,
@@ -56,7 +52,6 @@ export default class CreateNewRecord extends Component<{}, any> {
             .post("http://localhost:5000/record/add", newperson)
             .then((res) => console.log(res.data));
 
-        // We will empty the state after posting the data to the database
         this.setState({
             person_name: "",
             person_position: "",
@@ -97,7 +92,7 @@ export default class CreateNewRecord extends Component<{}, any> {
                             >
                             </TextField>
                         </Grid>
-                        <Grid item sx={{ mt: '50px' }}>
+                        <Grid item sx={{ mt: '40px' }}>
                             <FormLabel component="legend" color='secondary' sx={{ mb: '8px' }}>Experience Level:</FormLabel>
                             <RadioGroup
                                 aria-label="Experience"
@@ -109,7 +104,7 @@ export default class CreateNewRecord extends Component<{}, any> {
                                 <FormControlLabel value='Senior' control={<Radio />} label="Senior" />
                             </RadioGroup>
                         </Grid>
-                        <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onSubmit={this.onSubmit}>
+                        <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={this.onSubmit}>
                             Submit
                         </Button>
                     </Grid>
