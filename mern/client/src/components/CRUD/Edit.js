@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 // This will require to npm install axios
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ class Edit extends Component {
 
     componentDidMount() {
         axios
-            .get("http://localhost:5000/record/" + this.props.match.params.id)
+            .get("http://localhost:5000/Edit/" + this.state.id)
             .then((response) => {
                 this.setState({
                     person_name: response.data.person_name,
