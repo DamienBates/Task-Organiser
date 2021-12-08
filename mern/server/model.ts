@@ -8,7 +8,7 @@ const CommentsSchema = new Schema({
     content: {
         type: String
     },
-    angle: {
+    date: {
         type: String
     },
 });

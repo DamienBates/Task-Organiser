@@ -8,33 +8,33 @@ export default class CreateNewRecord extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangePersonName = this.onChangePersonName.bind(this);
-        this.onChangePersonPosition = this.onChangePersonPosition.bind(this);
-        this.onChangePersonLevel = this.onChangePersonLevel.bind(this);
+        this.onChangeHandle = this.onChangeHandle.bind(this);
+        this.onChangeContent = this.onChangeContent.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            person_name: "",
-            person_position: "",
-            person_level: "",
+            handle: "",
+            content: "",
+            date: "",
         };
     }
 
-    onChangePersonName(e) {
+    onChangeHandle(e) {
         this.setState({
-            person_name: e.target.value,
+            handle: e.target.value,
         });
     }
 
-    onChangePersonPosition(e) {
+    onChangeContent(e) {
         this.setState({
-            person_position: e.target.value,
+            content: e.target.value,
         });
     }
 
-    onChangePersonLevel(e) {
+    onChangeDate(e) {
         this.setState({
-            person_level: e.target.value,
+            date: e.target.value,
         });
     }
 
@@ -42,13 +42,13 @@ export default class CreateNewRecord extends Component {
         e.preventDefault();
 
         const newperson = {
-            person_name: this.state.person_name,
-            person_position: this.state.person_position,
-            person_level: this.state.person_level,
+            handle: this.state.handle,
+            content: this.state.content,
+            date: this.state.date,
         };
 
         axios
-            .post("http://localhost:5000/record/add", newperson)
+            .post("http://localhost:5000/add-comment", newperson)
             .then((res) => console.log(res.data));
 
         this.setState({
@@ -65,42 +65,42 @@ export default class CreateNewRecord extends Component {
                     sx={{ mt: '20px', mb: '20px', fontWeight: 'bold' }}
                     variant="h6"
                 >
-                    Create New User
+                    Create New Comment
                 </Typography>
                 <FormControl onSubmit={this.onSubmit}>
                     <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
                         <Grid item>
                             <TextField
                                 id="outlined-basic"
-                                label="Name"
+                                label="Task"
                                 variant="filled"
                                 color='secondary'
-                                value={this.state.person_name}
-                                onChange={this.onChangePersonName}
+                                value={this.state.handle}
+                                onChange={this.onChangeHandle}
                             >
                             </TextField>
                         </Grid>
                         <Grid item sx={{ mt: '20px' }}>
                             <TextField
                                 id="outlined-basic"
-                                label="Position"
+                                label="Comments"
                                 variant="filled"
                                 color='secondary'
-                                value={this.state.person_position}
-                                onChange={this.onChangePersonPosition}
+                                value={this.state.content}
+                                onChange={this.onChangeContent}
                             >
                             </TextField>
                         </Grid>
                         <Grid item sx={{ mt: '40px' }}>
-                            <FormLabel component="legend" color='secondary' sx={{ mb: '8px' }}>Experience Level:</FormLabel>
+                            <FormLabel component="legend" color='secondary' sx={{ mb: '8px' }}>Priority:</FormLabel>
                             <RadioGroup
                                 aria-label="Experience"
-                                value={this.state.person_level}
-                                onChange={this.onChangePersonLevel}
+                                value={this.state.date}
+                                onChange={this.onChangeDate}
                             >
-                                <FormControlLabel value='Intern' control={<Radio />} label="Intern" />
-                                <FormControlLabel value='Junior' control={<Radio />} label="Junior" />
-                                <FormControlLabel value='Senior' control={<Radio />} label="Senior" />
+                                <FormControlLabel value='Low' control={<Radio />} label="Low" />
+                                <FormControlLabel value='Medium' control={<Radio />} label="Medium" />
+                                <FormControlLabel value='High' control={<Radio />} label="High" />
                             </RadioGroup>
                         </Grid>
                         <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={this.onSubmit}>

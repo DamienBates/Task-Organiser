@@ -6,9 +6,9 @@ import { Table, Typography, TableHead, TableRow } from "@mui/material";
 
 const Record = (props) => (
     <tr>
-        <td>{props.record.person_name}</td>
-        <td>{props.record.person_position}</td>
-        <td>{props.record.person_level}</td>
+        <td>{props.record.handle}</td>
+        <td>{props.record.content}</td>
+        <td>{props.record.date}</td>
         <td>
             <Link to={"/Edit/" + props.record._id}>Edit</Link> |
             <a
@@ -34,7 +34,7 @@ export default class RecordList extends Component {
     // This method will get the data from the database.
     componentDidMount() {
         axios
-            .get("http://localhost:5000/Record/")
+            .get("http://localhost:5000/")
             .then((response) => {
                 this.setState({ records: response.data });
             })
