@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const CommentsSchema = new Schema({
-    handle: {
+const TasksSchema = new Schema({
+    task: {
         type: String
     },
-    content: {
+    comments: {
         type: String
     },
-    date: {
+    priority: {
         type: String
     },
 });
 
-const CommentsModel = mongoose.model("Comments", CommentsSchema)
-export default CommentsModel
+const TasksModel = mongoose.model("Tasks", TasksSchema)
+export default TasksModel

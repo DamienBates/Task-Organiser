@@ -5,7 +5,8 @@ export const Home = () => {
     return (
         <Box>
             <Typography paragraph>
-                Hello, you are on the homepage
+                Create your task using the "Create Task" button at the top right. Indicate urgency
+                and it'll sort with highest priority being at the top.
             </Typography>
         </Box>
     )

@@ -8,10 +8,9 @@ import { Grid, Button } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import UseListItem from './UseListItem';
 import HomeIcon from '@mui/icons-material/Home';
-import CallIcon from '@mui/icons-material/Call';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 
-const drawerWidth = 180;
+const drawerWidth = 170;
 
 export default function ClippedDrawer() {
   return (
@@ -21,16 +20,16 @@ export default function ClippedDrawer() {
         <Toolbar>
           <Grid container justifyContent='flex-start'>
             <Typography variant="h6" noWrap component="div">
-              News Aggregator
+              Task Aggregator
             </Typography>
           </Grid>
           <Grid container justifyContent='flex-end'>
             <Button
               endIcon={<LoginIcon />}
-              href='./CreateNewRecord'
+              href='./CreateTask'
               variant="contained"
             >
-              Create User
+              Create Task
             </Button>
           </Grid>
         </Toolbar>
@@ -54,13 +53,8 @@ export default function ClippedDrawer() {
             icon={<HomeIcon />}
           />
           <UseListItem
-            link='AboutUs'
-            name='Contact'
-            icon={<CallIcon />}
-          />
-          <UseListItem
-            link='Record'
-            name='Visitors'
+            link='TaskList'
+            name='Tasks'
             icon={<DirectionsRunIcon />}
           />
         </Box>

@@ -4,57 +4,73 @@ import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormCo
 import { Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
-export default class CreateNewRecord extends Component {
+export default class CreateTask extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeHandle = this.onChangeHandle.bind(this);
-        this.onChangeContent = this.onChangeContent.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
+        this.onChangeTask = this.onChangeTask.bind(this);
+        this.onChangeComment = this.onChangeComment.bind(this);
+        this.onChangePriority = this.onChangePriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            handle: "",
-            content: "",
-            date: "",
+            task: "",
+            comment: "",
+            priority: "",
         };
     }
 
-    onChangeHandle(e) {
+
+    // componentDidMount() {
+    //     axios
+    //         .get("http://localhost:5000/add-comment/" + this.state.id)
+    //         .then((response) => {
+    //             this.setState({
+    //                 task: response.data.task,
+    //                 comment: response.data.comment,
+    //                 priority: response.data.priority,
+    //             });
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // }
+
+    onChangeTask(e) {
         this.setState({
-            handle: e.target.value,
+            task: e.target.value,
         });
     }
 
-    onChangeContent(e) {
+    onChangeComment(e) {
         this.setState({
-            content: e.target.value,
+            comment: e.target.value,
         });
     }
 
-    onChangeDate(e) {
+    onChangePriority(e) {
         this.setState({
-            date: e.target.value,
+            priority: e.target.value,
         });
     }
 
     onSubmit(e) {
         e.preventDefault();
 
-        const newperson = {
-            handle: this.state.handle,
-            content: this.state.content,
-            date: this.state.date,
+        const newtask = {
+            task: this.state.task,
+            comment: this.state.comment,
+            priority: this.state.priority,
         };
 
         axios
-            .post("http://localhost:5000/add-comment", newperson)
+            .post("http://localhost:5000/add-comment", newtask)
             .then((res) => console.log(res.data));
 
         this.setState({
-            person_name: "",
-            person_position: "",
-            person_level: "",
+            task: "",
+            comment: "",
+            priority: "",
         });
     }
 
@@ -75,8 +91,8 @@ export default class CreateNewRecord extends Component {
                                 label="Task"
                                 variant="filled"
                                 color='secondary'
-                                value={this.state.handle}
-                                onChange={this.onChangeHandle}
+                                value={this.state.task}
+                                onChange={this.onChangeTask}
                             >
                             </TextField>
                         </Grid>
@@ -86,8 +102,8 @@ export default class CreateNewRecord extends Component {
                                 label="Comments"
                                 variant="filled"
                                 color='secondary'
-                                value={this.state.content}
-                                onChange={this.onChangeContent}
+                                value={this.state.comment}
+                                onChange={this.onChangeComment}
                             >
                             </TextField>
                         </Grid>
@@ -95,8 +111,8 @@ export default class CreateNewRecord extends Component {
                             <FormLabel component="legend" color='secondary' sx={{ mb: '8px' }}>Priority:</FormLabel>
                             <RadioGroup
                                 aria-label="Experience"
-                                value={this.state.date}
-                                onChange={this.onChangeDate}
+                                value={this.state.priority}
+                                onChange={this.onChangePriority}
                             >
                                 <FormControlLabel value='Low' control={<Radio />} label="Low" />
                                 <FormControlLabel value='Medium' control={<Radio />} label="Medium" />

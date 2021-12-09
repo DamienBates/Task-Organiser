@@ -1,4 +1,4 @@
-import CommentsModel from "./model"
+import TasksModel from "./model"
 
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
@@ -20,59 +20,59 @@ mongoose.connect(URI, features, (error: any) => {
 });
 
 // Routes:
-// All Comments
-app.get('/', (req: any, res: any) => {
-    CommentsModel.find(function (err: any, comments: any) {
+// All Tasks
+app.route('/').get((req: any, res: any) => {
+    TasksModel.find(function (err: any, tasks: any) {
         if (err) {
             console.error(err)
         } else {
-            res.json(comments);
+            res.json(tasks);
         }
     })
 })
 
 // CRUD:
 // Create
-app.route('/add-comment').post((req: any, res: any) => {
-    CommentsModel.create(req.body, (err: any, comments: any) => {
+app.route('/add-task').post((req: any, res: any) => {
+    TasksModel.create(req.body, (err: any, tasks: any) => {
         if (err) {
             console.error(err)
         } else {
-            console.log(comments)
-            res.json(comments)
+            console.log(tasks)
+            res.json(tasks)
         }
     })
 })
 
 // Read
-app.get(('/user/:id'), (req: any, res: any) => {
+app.route('/user/:id').get((req: any, res: any) => {
     var id = req.params.id;
-    CommentsModel.findById(id, (err: any, comments: any) => {
+    TasksModel.findById(id, (err: any, tasks: any) => {
         if (err) {
             console.error(err)
         } else {
-            res.json(comments);
+            res.json(tasks);
         }
     });
 });
 
 // Update
-app.route('/edit-comment/:id').post((req: any, res: any) => {
+app.route('/edit-task/:id').post((req: any, res: any) => {
     var id = req.params.id;
 
-    CommentsModel.findById(id, { $set: req.body }, (err: any, comment: any) => {
-        if (!comment) res.status(404).send(err, "Comment not found");
-        else res.json(comment);
+    TasksModel.findById(id, { $set: req.body }, (err: any, task: any) => {
+        if (!task) res.status(404).send(err, "Task not found");
+        else res.json(task);
     })
 });
 
 // Delete
-app.route('/delete-comment/:id').delete((req: any, res: any) => {
+app.route('/delete-task/:id').delete((req: any, res: any) => {
     var id = req.params.id;
 
-    CommentsModel.findByIdAndRemove(id, (err: any, comment: any) => {
-        if (err) res.status(404).send(err, "Comment not found")
-        else res.status(200).json({ msg: comment });
+    TasksModel.findByIdAndRemove(id, (err: any, task: any) => {
+        if (err) res.status(404).send(err, "Task not found")
+        else res.status(200).json({ msg: task });
     })
 });
 
