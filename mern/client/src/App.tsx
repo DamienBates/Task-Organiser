@@ -1,30 +1,26 @@
-import { Route, Routes, useParams } from "react-router";
-import ClippedDrawer from "./components/ClippedDrawer";
+import { Route, Routes } from "react-router";
+import NavBar from "./components/NavBar";
 import Home from "./components/Home";
-import CreateTask from "./components/CRUD/CreateTask";
-import TaskList from "./components/CRUD/TaskList";
+import CreateTask from "./components/CreateTask";
+import TaskList from "./components/TaskList";
+import TasksList from "./components/TasksList"
 import Edit from "./components/CRUD/Edit";
 import { ThemeProvider } from "@emotion/react";
 import CustomTheme from "./components/CustomTheme";
 
-function Editing() {
-  let { id } = useParams();
-  return (
-    { id }
-  )
-}
 
 const App = () => {
   return (
     <section>
       <ThemeProvider theme={CustomTheme}>
-        <ClippedDrawer />
-        <div style={{ marginLeft: '21vh', marginTop: '30px', marginRight: '35px' }}>
+        <NavBar />
+        <div style={{ margin: '3vh' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/CreateTask" element={<CreateTask />} />
-            <Route path="/Edit/:id" element={<Edit />}>{Editing}</Route>
+            <Route path="/Edit/:id" element={<Edit />}></Route>
             <Route path="/TaskList" element={<TaskList />} />
+            <Route path="/TasksList" element={<TasksList />} />
           </Routes>
         </div>
       </ThemeProvider>

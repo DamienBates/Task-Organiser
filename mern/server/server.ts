@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.listen(PORT);
 
-// Confirm a good connection
+// Confirm we have a good connection
 mongoose.connect(URI, features, (error: any) => {
     console.log(`Successfully connected to MongoDB database on port ${PORT}`)
     if (error) throw error;
