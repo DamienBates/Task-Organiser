@@ -1,32 +1,10 @@
-import { DataGrid, GridActionsCellItem, GridColDef, GridColumns } from '@mui/x-data-grid';
-import { Button } from '@material-ui/core';
+import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
 import { Component } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
+import axios from 'axios'
 
-const renderEditButton = () => {
-  return (
-    <Button
-      variant="contained"
-      size="small"
-      color="secondary"
-    >
-      Edit
-    </Button>
-  )
-}
 
-const renderDeleteButton = () => {
-  return (
-    <Button
-      variant="contained"
-      size="small"
-      color="secondary"
-    >
-      Delete
-    </Button>
-  )
-}
 
 const columns: GridColumns = [
   { field: 'id', headerName: 'ID', width: 50 },
@@ -57,8 +35,29 @@ const rows = [
 ];
 
 export default class TaskList extends Component {
-  render() {
+  constructor(props: any) {
+    super(props);
+    this.state = { edit: [] }
+  }
 
+  componentDidMount() {
+    axios
+      .get("http:localhost:5000/")
+      .then((response) => {
+        this.setState({ edit: response.data })
+      })
+      .catch(() => {
+        console.log('Omg, that failed')
+      })
+  }
+
+  // taskListReturned() {
+  //   return this.state.map((returned: any) => {
+
+  //   })
+  // }
+
+  render() {
     return (
       <div style={{ height: 750, width: '100%' }}>
         <DataGrid

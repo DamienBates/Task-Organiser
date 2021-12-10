@@ -45,7 +45,7 @@ app.route('/add-task').post((req: any, res: any) => {
 })
 
 // Read
-app.route('/user/:id').get((req: any, res: any) => {
+app.route('/task/:id').get((req: any, res: any) => {
     var id = req.params.id;
     TasksModel.findById(id, (err: any, tasks: any) => {
         if (err) {
@@ -75,4 +75,6 @@ app.route('/delete-task/:id').delete((req: any, res: any) => {
         else res.status(200).json({ msg: task });
     })
 });
+
+
 

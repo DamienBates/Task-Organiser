@@ -15,7 +15,7 @@ export default function NavBar() {
         <Toolbar>
           <Grid container justifyContent='flex-start'>
             <Typography variant="h6" noWrap component="div">
-              Task Aggregator
+              Task Organiser
             </Typography>
           </Grid>
           <Grid container justifyContent='flex-end'>
