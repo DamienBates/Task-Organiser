@@ -4,7 +4,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import axios from 'axios'
 
-
+const TasksReturned = (props: any) => {
+  return (<tr>
+    <td>{props.task._id}</td>
+    <td>{props.task.task}</td>
+    <td>{props.task.comments}</td>
+    <td>{props.task.priority}</td>
+    <td><a href="/ReadTask" onClick={() => { props.deleteTask(props._id) }}>Delete</a></td>
+  </tr>
+  )
+};
 
 const columns: GridColumns = [
   { field: 'id', headerName: 'ID', width: 50 },
@@ -34,21 +43,38 @@ const rows = [
   { id: 9, taskName: 'Roxie', commentName: 'Harvey', priority: 'Low' },
 ];
 
-export default class TaskList extends Component {
-  constructor(props: any) {
+export default class ReadTask extends Component<any, any> {
+  constructor(props: Array<any>) {
     super(props);
+    this.deleteTask = this.deleteTask.bind(this);
     this.state = { edit: [] }
   }
 
   componentDidMount() {
     axios
-      .get("http:localhost:5000/")
+      .get("http://localhost:5000/")
       .then((response) => {
         this.setState({ edit: response.data })
       })
-      .catch(() => {
-        console.log('Omg, that failed')
+      .catch((error: string) => {
+        console.log(error)
       })
+  }
+
+  deleteTask(id: string) {
+    axios.delete("http://localhost:5000/" + id).then((res) => {
+      console.log(res.data);
+    });
+
+    this.setState({
+      task: this.state.edit.filter((el: any) => el._id !== id),
+    });
+  }
+
+  taskList() {
+    return this.state.edit.map((currentTask: any) => {
+      return <TasksReturned task={currentTask} deleteTask={this.deleteTask} key={currentTask._id} />;
+    })
   }
 
   // taskListReturned() {
@@ -59,16 +85,22 @@ export default class TaskList extends Component {
 
   render() {
     return (
-      <div style={{ height: 750, width: '100%' }}>
+      <div style={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={rows}
           columns={columns}
           sx={{ backgroundColor: '#1a0130', mt: '3.3vh' }}
-          pageSize={20}
-          rowsPerPageOptions={[20]}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
           checkboxSelection
           disableSelectionOnClick
         />
+        <div>
+          <table>
+            <tbody></tbody>
+            <tbody>{this.taskList()}</tbody>
+          </table>
+        </div>
       </div>
     );
   };

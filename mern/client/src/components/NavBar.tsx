@@ -29,7 +29,7 @@ export default function NavBar() {
             <Grid sx={{ ml: '2vh' }}>
               <Button
                 endIcon={<ListAltIcon />}
-                href='./TaskList'
+                href='./ReadTask'
                 variant="contained"
               >
                 Task List

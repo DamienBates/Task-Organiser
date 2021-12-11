@@ -9,13 +9,13 @@ export default class CreateTask extends Component<any, any> {
         super(props);
 
         this.onChangeTask = this.onChangeTask.bind(this);
-        this.onChangeComment = this.onChangeComment.bind(this);
+        this.onChangeComments = this.onChangeComments.bind(this);
         this.onChangePriority = this.onChangePriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             task: "",
-            comment: "",
+            comments: "",
             priority: "",
         };
     }
@@ -26,9 +26,9 @@ export default class CreateTask extends Component<any, any> {
         });
     }
 
-    onChangeComment(e: any) {
+    onChangeComments(e: any) {
         this.setState({
-            comment: e.target.value,
+            comments: e.target.value,
         });
     }
 
@@ -43,7 +43,7 @@ export default class CreateTask extends Component<any, any> {
 
         const newtask = {
             task: this.state.task,
-            comment: this.state.comment,
+            comments: this.state.comments,
             priority: this.state.priority,
         };
 
@@ -53,9 +53,9 @@ export default class CreateTask extends Component<any, any> {
 
         this.setState({
             task: "",
-            comment: "",
+            comments: "",
             priority: "",
-        });
+        })
     }
 
     render() {
@@ -87,8 +87,8 @@ export default class CreateTask extends Component<any, any> {
                                     label="Comments"
                                     variant="filled"
                                     color='secondary'
-                                    value={this.state.comment}
-                                    onChange={this.onChangeComment}
+                                    value={this.state.comments}
+                                    onChange={this.onChangeComments}
                                 >
                                 </TextField>
                             </Grid>

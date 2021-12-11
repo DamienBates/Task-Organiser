@@ -33,7 +33,7 @@ app.route('/').get((req: any, res: any) => {
 
 // CRUD:
 // Create
-app.route('/add-task').post((req: any, res: any) => {
+app.route('/create-task').post((req: any, res: any) => {
     TasksModel.create(req.body, (err: any, tasks: any) => {
         if (err) {
             console.error(err)
@@ -45,7 +45,7 @@ app.route('/add-task').post((req: any, res: any) => {
 })
 
 // Read
-app.route('/task/:id').get((req: any, res: any) => {
+app.route('/add-task/:id').get((req: any, res: any) => {
     var id = req.params.id;
     TasksModel.findById(id, (err: any, tasks: any) => {
         if (err) {
@@ -68,7 +68,7 @@ app.route('/edit-task/:id').post((req: any, res: any) => {
 
 // Delete
 app.route('/delete-task/:id').delete((req: any, res: any) => {
-    var id = req.params.id;
+    var id = req.params._id;
 
     TasksModel.findByIdAndRemove(id, (err: any, task: any) => {
         if (err) res.status(404).send(err, "Task not found")
@@ -76,5 +76,6 @@ app.route('/delete-task/:id').delete((req: any, res: any) => {
     })
 });
 
+module.exports = app;
 
 

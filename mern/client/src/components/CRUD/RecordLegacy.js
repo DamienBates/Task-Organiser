@@ -4,24 +4,24 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Table, Typography, TableHead, TableRow } from "@mui/material";
 
-const Record = (props) => (
-    <tr>
-        <td>{props.record.handle}</td>
-        <td>{props.record.content}</td>
-        <td>{props.record.date}</td>
-        <td>
-            <Link to={"/Edit/" + props.record._id}>Edit</Link> |
-            <a
-                href="/"
-                onClick={() => {
-                    props.deleteRecord(props.record._id);
-                }}
-            >
-                Delete
-            </a>
-        </td>
-    </tr>
-);
+// const Record = (props) => (
+//     <tr>
+//         <td>{props.record.handle}</td>
+//         <td>{props.record.content}</td>
+//         <td>{props.record.date}</td>
+//         <td>
+//             <Link to={"/Edit/" + props.record._id}>Edit</Link> |
+//             <a
+//                 href="/"
+//                 onClick={() => {
+//                     props.deleteRecord(props.record._id);
+//                 }}
+//             >
+//                 Delete
+//             </a>
+//         </td>
+//     </tr>
+// );
 
 export default class RecordList extends Component {
     // This is the constructor that shall store our data retrieved from the database
