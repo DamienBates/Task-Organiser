@@ -1,17 +1,36 @@
 import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
+import { TableContainer, Table, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { Component } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import axios from 'axios'
 
 const TasksReturned = (props: any) => {
-  return (<tr>
-    <td>{props.task._id}</td>
-    <td>{props.task.task}</td>
-    <td>{props.task.comments}</td>
-    <td>{props.task.priority}</td>
-    <td><a href="/ReadTask" onClick={() => { props.deleteTask(props._id) }}>Delete</a></td>
-  </tr>
+  const rows = [
+    { id: 1, taskName: 'Too many napkins', commentName: 'Jon', priority: 'High' },
+    { id: 2, taskName: 'Lannister', commentName: 'Cersei', priority: 'High' },
+    { id: 3, taskName: 'Lannister', commentName: 'Jaime', priority: 'High' },
+    { id: 4, taskName: 'Stark', commentName: 'Arya', priority: 'High' },
+    { id: 5, taskName: 'Targaryen', commentName: 'Daenerys', priority: 'Medium' },
+    { id: 6, taskName: 'Melisandre', commentName: 'Top', priority: 'Medium' },
+    { id: 7, taskName: 'Clifford', commentName: 'Ferrara', priority: 'Medium' },
+    { id: 8, taskName: 'Frances', commentName: 'Rossini', priority: 'Medium' },
+    { id: 9, taskName: 'Roxie', commentName: 'Harvey', priority: 'Low' },
+  ];
+
+  return (
+    <TableContainer>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell>{props.task.task}</TableCell>
+            <TableCell align="right">{props.task.comments}</TableCell>
+            <TableCell align="right">{props.task.priority}</TableCell>
+            <TableCell align="right"><a href="/ReadTask" onClick={() => { props.deleteTask(props.task._id) }}>Delete</a></TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer >
   )
 };
 
@@ -30,6 +49,10 @@ const columns: GridColumns = [
     ]
   },
 ];
+
+function taskCreated(id: any, taskName: any, commentName: any, priority: any) {
+  return { id, taskName, commentName, priority }
+}
 
 const rows = [
   { id: 1, taskName: 'Too many napkins', commentName: 'Jon', priority: 'High' },
@@ -61,27 +84,22 @@ export default class ReadTask extends Component<any, any> {
       })
   }
 
-  deleteTask(id: string) {
-    axios.delete("http://localhost:5000/" + id).then((res) => {
-      console.log(res.data);
-    });
-
-    this.setState({
-      task: this.state.edit.filter((el: any) => el._id !== id),
-    });
+  deleteTask(id: any) {
+    axios
+      .delete(`http://localhost:5000/delete-task/${id}`)
+      .then((res) => {
+        console.log(res.data.id);
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
   }
 
   taskList() {
-    return this.state.edit.map((currentTask: any) => {
-      return <TasksReturned task={currentTask} deleteTask={this.deleteTask} key={currentTask._id} />;
+    return this.state.edit.map((currentTask: any, index: any) => {
+      return <TasksReturned task={currentTask} deleteTask={this.deleteTask} key={index} />;
     })
   }
-
-  // taskListReturned() {
-  //   return this.state.map((returned: any) => {
-
-  //   })
-  // }
 
   render() {
     return (
@@ -93,15 +111,14 @@ export default class ReadTask extends Component<any, any> {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
-          disableSelectionOnClick
-        />
+          disableSelectionOnClick />
         <div>
           <table>
             <tbody></tbody>
             <tbody>{this.taskList()}</tbody>
           </table>
         </div>
-      </div>
+      </div >
     );
   };
 };

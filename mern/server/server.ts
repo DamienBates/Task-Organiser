@@ -1,4 +1,5 @@
 import TasksModel from "./model"
+import axios from 'axios'
 
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
@@ -8,6 +9,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const URI = "mongodb+srv://damokevo:valorantstab32@mernapp1.4rgj6.mongodb.net/MERNapp1?retryWrites=true&w=majority";
 const features = { useNewUrlParser: true, useUnifiedTopology: true }
+export default axios.create({
+    baseURL: "http://localhost:5000/",
+    headers: {
+        "Content-type": "application/json"
+    }
+});
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -33,7 +41,7 @@ app.route('/').get((req: any, res: any) => {
 
 // CRUD:
 // Create
-app.route('/create-task').post((req: any, res: any) => {
+app.route('/add-task').post((req: any, res: any) => {
     TasksModel.create(req.body, (err: any, tasks: any) => {
         if (err) {
             console.error(err)
@@ -68,14 +76,15 @@ app.route('/edit-task/:id').post((req: any, res: any) => {
 
 // Delete
 app.route('/delete-task/:id').delete((req: any, res: any) => {
-    var id = req.params._id;
+    var _id = req.params.id;
 
-    TasksModel.findByIdAndRemove(id, (err: any, task: any) => {
-        if (err) res.status(404).send(err, "Task not found")
-        else res.status(200).json({ msg: task });
+    TasksModel.findByIdAndRemove(_id, (err: any, task: any) => {
+        if (err) {
+            return err;
+        }
+        else res.status(200).json(`Task was deleted with id: ${_id}`);
     })
 });
 
-module.exports = app;
 
 
