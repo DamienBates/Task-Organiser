@@ -1,25 +1,17 @@
-import { Component } from "react";
+import { ChangeEvent, Component } from "react";
 // This will require to npm install axios
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-const withRouter = (Component) => {
-    const Wrapper = (props) => {
-        const history = useNavigate();
+interface MyProps { }
+interface MyState {
+    task: string,
+    comments: string,
+    priority: string,
+    records: Array<string>
+}
 
-        return (
-            <Component
-                history={history}
-                {...props}
-            />
-        );
-    };
-
-    return Wrapper;
-};
-
-class Edit extends Component {
-    constructor(props) {
+class Edit extends Component<MyProps, MyState> {
+    constructor(props: any) {
         super(props);
 
         this.onChangePersonName = this.onChangePersonName.bind(this);
@@ -28,21 +20,21 @@ class Edit extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            person_name: "",
-            person_position: "",
-            person_level: "",
+            task: "",
+            comments: "",
+            priority: "",
             records: [],
         };
     }
 
     componentDidMount() {
         axios
-            .get("http://localhost:5000/Edit/" + this.state.id)
+            .get(`http://localhost:5000/Edit/id:`)
             .then((response) => {
                 this.setState({
-                    person_name: response.data.person_name,
-                    person_position: response.data.person_position,
-                    person_level: response.data.person_level,
+                    task: response.data.task,
+                    comments: response.data.comments,
+                    priority: response.data.priority,
                 });
             })
             .catch(function (error) {
@@ -50,54 +42,52 @@ class Edit extends Component {
             });
     }
 
-    onChangePersonName(e) {
+    onChangePersonName(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
-            person_name: e.target.value,
+            task: e.target.value,
         });
     }
 
-    onChangePersonPosition(e) {
+    onChangePersonPosition(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
-            person_position: e.target.value,
+            comments: e.target.value,
         });
     }
 
-    onChangePersonLevel(e) {
+    onChangePersonLevel(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
-            person_level: e.target.value,
+            priority: e.target.value,
         });
     }
 
-    onSubmit(e) {
+    onSubmit(e: ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
         const newEditedperson = {
-            person_name: this.state.person_name,
-            person_position: this.state.person_position,
-            person_level: this.state.person_level,
+            task: this.state.task,
+            comments: this.state.comments,
+            priority: this.state.priority,
         };
         console.log(newEditedperson);
 
         axios
             .post(
-                "http://localhost:5000/update/" + this.props.match.params.id,
+                `http://localhost:5000/update/id:`,
                 newEditedperson
             )
             .then((res) => console.log(res.data));
-
-        this.props.history.push("/");
     }
 
     render() {
         return (
             <div>
-                <h3 align="center">Update Record</h3>
-                <form onSubmit={this.onSubmit}>
+                <h3>Update Record</h3>
+                <form onSubmit={() => this.onSubmit}>
                     <div className="form-group">
                         <label>Person's Name: </label>
                         <input
                             type="text"
                             className="form-control"
-                            value={this.state.person_name}
+                            value={this.state.task}
                             onChange={this.onChangePersonName}
                         />
                     </div>
@@ -106,7 +96,7 @@ class Edit extends Component {
                         <input
                             type="text"
                             className="form-control"
-                            value={this.state.person_position}
+                            value={this.state.comments}
                             onChange={this.onChangePersonPosition}
                         />
                     </div>
@@ -118,7 +108,7 @@ class Edit extends Component {
                                 name="priorityOptions"
                                 id="priorityLow"
                                 value="Intern"
-                                checked={this.state.person_level === "Intern"}
+                                checked={this.state.priority === "Intern"}
                                 onChange={this.onChangePersonLevel}
                             />
                             <label className="form-check-label">Intern</label>
@@ -130,7 +120,7 @@ class Edit extends Component {
                                 name="priorityOptions"
                                 id="priorityMedium"
                                 value="Junior"
-                                checked={this.state.person_level === "Junior"}
+                                checked={this.state.priority === "Junior"}
                                 onChange={this.onChangePersonLevel}
                             />
                             <label className="form-check-label">Junior</label>
@@ -142,7 +132,7 @@ class Edit extends Component {
                                 name="priorityOptions"
                                 id="priorityHigh"
                                 value="Senior"
-                                checked={this.state.person_level === "Senior"}
+                                checked={this.state.priority === "Senior"}
                                 onChange={this.onChangePersonLevel}
                             />
                             <label className="form-check-label">Senior</label>
@@ -166,4 +156,4 @@ class Edit extends Component {
 // You can get access to the history object's properties and the closest <Route>'s match via the withRouter
 // higher-order component. This makes it easier for us to edit our records.
 
-export default withRouter(Edit);
+export default Edit;

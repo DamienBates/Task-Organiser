@@ -50,7 +50,7 @@ const columns: GridColumns = [
   },
 ];
 
-function taskCreated(id: any, taskName: any, commentName: any, priority: any) {
+function taskCreated(id: number, taskName: string, commentName: string, priority: string) {
   return { id, taskName, commentName, priority }
 }
 
@@ -66,8 +66,13 @@ const rows = [
   { id: 9, taskName: 'Roxie', commentName: 'Harvey', priority: 'Low' },
 ];
 
-export default class ReadTask extends Component<any, any> {
-  constructor(props: Array<any>) {
+interface MyProps { }
+interface MyState {
+  edit: Array<string>,
+}
+
+export default class ReadTask extends Component<MyProps, MyState> {
+  constructor(props: any) {
     super(props);
     this.deleteTask = this.deleteTask.bind(this);
     this.state = { edit: [] }
@@ -84,19 +89,19 @@ export default class ReadTask extends Component<any, any> {
       })
   }
 
-  deleteTask(id: any) {
+  deleteTask(id: string) {
     axios
       .delete(`http://localhost:5000/delete-task/${id}`)
-      .then((res) => {
-        console.log(res.data.id);
+      .then((response) => {
+        console.log(response.data.id);
       })
-      .catch((error: any) => {
+      .catch((error: string) => {
         console.log(error)
       })
   }
 
   taskList() {
-    return this.state.edit.map((currentTask: any, index: any) => {
+    return this.state.edit.map((currentTask: string, index: number) => {
       return <TasksReturned task={currentTask} deleteTask={this.deleteTask} key={index} />;
     })
   }

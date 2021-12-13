@@ -1,10 +1,18 @@
-import { Component } from 'react';
-import axios from 'axios';
+import { ChangeEvent, Component } from 'react';
+import axios from 'axios'
 import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormControlLabel, Radio } from "@mui/material";
 import { Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
-export default class CreateTask extends Component<any, any> {
+
+interface MyProps { }
+interface MyState {
+    task: string,
+    comments: string,
+    priority: string
+}
+
+export default class CreateTask extends Component<MyProps, MyState> {
     constructor(props: any) {
         super(props);
 
@@ -20,25 +28,25 @@ export default class CreateTask extends Component<any, any> {
         };
     }
 
-    onChangeTask(e: any) {
+    onChangeTask(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
             task: e.target.value,
         });
     }
 
-    onChangeComments(e: any) {
+    onChangeComments(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
             comments: e.target.value,
         });
     }
 
-    onChangePriority(e: any) {
+    onChangePriority(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
             priority: e.target.value,
         });
     }
 
-    onSubmit(e: any) {
+    onSubmit(e: ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
 
         const newtask = {
@@ -49,7 +57,7 @@ export default class CreateTask extends Component<any, any> {
 
         axios
             .post("http://localhost:5000/add-task", newtask)
-            .then((res) => console.log(res.data));
+            .then((response) => console.log(response.data));
 
         this.setState({
             task: "",
@@ -104,7 +112,7 @@ export default class CreateTask extends Component<any, any> {
                                     <FormControlLabel value='High' control={<Radio />} label="High" />
                                 </RadioGroup>
                             </Grid>
-                            <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={this.onSubmit}>
+                            <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={() => this.onSubmit}>
                                 Submit
                             </Button>
                         </Grid>

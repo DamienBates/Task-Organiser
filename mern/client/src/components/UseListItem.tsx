@@ -1,7 +1,8 @@
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { SvgIconComponent } from "@material-ui/icons";
 
-export const UseListItem = (props: { name: string; icon: any; link: string; }) => {
+export const UseListItem = (props: { name: string; icon: SvgIconComponent; link: string; }) => {
     const { name, icon, link } = props;
 
     return (
