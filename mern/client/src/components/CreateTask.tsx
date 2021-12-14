@@ -46,7 +46,7 @@ export default class CreateTask extends Component<MyProps, MyState> {
         });
     }
 
-    onSubmit(e: ChangeEvent<HTMLInputElement>) {
+    onSubmit(e: any) {
         e.preventDefault();
 
         const newtask = {
@@ -112,7 +112,7 @@ export default class CreateTask extends Component<MyProps, MyState> {
                                     <FormControlLabel value='High' control={<Radio />} label="High" />
                                 </RadioGroup>
                             </Grid>
-                            <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={() => this.onSubmit}>
+                            <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={(e) => this.onSubmit(e)}>
                                 Submit
                             </Button>
                         </Grid>
