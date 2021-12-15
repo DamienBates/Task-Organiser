@@ -46,7 +46,7 @@ export default class ReadTask extends Component<MyProps, MyState> {
 
   columns2: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'taskName', headerName: 'Task', width: 200, editable: true },
+    { field: 'taskName', headerName: 'Task', width: 250, editable: true },
     { field: 'commentName', headerName: 'Comment', width: 300, editable: true },
     { field: 'priority', headerName: 'Priority', width: 100, editable: true },
     {

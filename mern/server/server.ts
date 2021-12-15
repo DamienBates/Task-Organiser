@@ -78,7 +78,7 @@ app.route('/edit-task/:id').post((req: any, res: any) => {
 app.route('/delete-task/:id').delete((req: any, res: any) => {
     var _id = req.params.id;
 
-    TasksModel.findByIdAndRemove(_id, (err: any, task: any) => {
+    TasksModel.findByIdAndremove(_id, (err: any, task: any) => {
         if (err) {
             return err;
         }
