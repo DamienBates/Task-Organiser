@@ -27,7 +27,8 @@ export default class ReadTask extends Component<MyProps, MyState> {
       })
   }
 
-  deleteTask(id: string) {
+  deleteTask(id: any) {
+    console.log(id)
     axios
       .delete(`http://localhost:5000/delete-task/${id}`)
       .then((response) => {
@@ -36,13 +37,16 @@ export default class ReadTask extends Component<MyProps, MyState> {
       .catch((error: string) => {
         console.log(error)
       })
+
   }
 
   parseArray(arr: any) {
     return arr.map((el: any, index: number) => {
-      return ({ id: index + 1, taskName: el.task, commentName: el.comments, priority: el.priority })
+      return ({ id: index + 1, taskName: el.task, commentName: el.comments, priority: el.priority, deleteItem: el._id })
     })
   }
+
+
 
   columns2: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50 },
@@ -55,7 +59,7 @@ export default class ReadTask extends Component<MyProps, MyState> {
       width: 100,
       getActions: () => [
         <GridActionsCellItem icon={<EditIcon />} label='Edit' />,
-        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => this.deleteTask} />
+        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={this.deleteTask.bind(this)} />
       ]
     },
   ];

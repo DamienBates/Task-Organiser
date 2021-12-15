@@ -1,16 +1,15 @@
-import TasksModel from "./model"
+import mongoose from 'mongoose'
+import TasksModel from './model'
+import bodyParser from 'body-parser'
+import express from 'express'
+import cors from 'cors'
 import axios from 'axios'
 
-const bodyParser = require("body-parser")
-const mongoose = require("mongoose")
-const express = require("express")
-const cors = require("cors")
 const app = express();
 const PORT = process.env.PORT || 5000;
 const URI = "mongodb+srv://damokevo:DjeBKMAgYxSMXWos@mernapp1.4rgj6.mongodb.net/MERNapp1?retryWrites=true&w=majority";
-const features = { useNewUrlParser: true, useUnifiedTopology: true }
 export default axios.create({
-    baseURL: "http://localhost:5000/",
+    baseURL: "http://localhost:5000",
     headers: {
         "Content-type": "application/json"
     }
@@ -22,7 +21,7 @@ app.use(cors());
 app.listen(PORT);
 
 // Confirm we have a good connection
-mongoose.connect(URI, features, (error: any) => {
+mongoose.connect(URI, (error: any) => {
     console.log(`Successfully connected to MongoDB database on port ${PORT}`)
     if (error) throw error;
 });
@@ -53,7 +52,7 @@ app.route('/add-task').post((req: any, res: any) => {
 })
 
 // Read
-app.route('/add-task/:id').get((req: any, res: any) => {
+app.route('/see-task/:id').get((req: any, res: any) => {
     var id = req.params.id;
     TasksModel.findById(id, (err: any, tasks: any) => {
         if (err) {
@@ -67,24 +66,30 @@ app.route('/add-task/:id').get((req: any, res: any) => {
 // Update
 app.route('/edit-task/:id').post((req: any, res: any) => {
     var id = req.params.id;
-
-    TasksModel.findById(id, { $set: req.body }, (err: any, task: any) => {
-        if (!task) res.status(404).send(err, "Task not found");
-        else res.json(task);
+    TasksModel.findByIdAndUpdate(id, { $set: req.body }, (err: any, task: any) => {
+        if (!task) {
+            res.status(404).send(err, "Task not found")
+        }
+        else {
+            res.json(task)
+        }
     })
 });
 
 // Delete
-app.route('/delete-task/:id').delete((req: any, res: any) => {
-    var _id = req.params.id;
-
-    TasksModel.findByIdAndremove(_id, (err: any, task: any) => {
+app.route('/delete-task/:id').get((req: any, res: any) => {
+    var id = req.params.id;
+    TasksModel.findByIdAndDelete(id, (err: any, taskDeleted: any) => {
         if (err) {
-            return err;
+            return console.error(err);
         }
-        else res.status(200).json(`Task was deleted with id: ${_id}`);
+        else {
+            res.status(200).json(`Task: ${taskDeleted.task} was deleted with id: ${id}`)
+        }
     })
 });
 
-
+// app.delete('/delete-task/:id', async (req: any, res: any)=> {
+//     const id = req.params.id
+// })
 
