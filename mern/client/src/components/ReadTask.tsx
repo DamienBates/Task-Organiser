@@ -1,5 +1,4 @@
 import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
-import { TableContainer, Table, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { Component } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
@@ -41,15 +40,15 @@ export default class ReadTask extends Component<MyProps, MyState> {
 
   parseArray(arr: any) {
     return arr.map((el: any, index: number) => {
-      return ({ id: index, taskName: el.task, commentName: el.comments, priority: el.priority })
+      return ({ id: index + 1, taskName: el.task, commentName: el.comments, priority: el.priority })
     })
   }
 
   columns2: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50 },
     { field: 'taskName', headerName: 'Task', width: 200, editable: true },
+    { field: 'commentName', headerName: 'Comment', width: 300, editable: true },
     { field: 'priority', headerName: 'Priority', width: 100, editable: true },
-    { field: 'commentName', headerName: 'Comment', width: 200, editable: true },
     {
       field: 'actions',
       type: 'actions',

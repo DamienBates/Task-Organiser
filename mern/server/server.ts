@@ -7,7 +7,7 @@ const express = require("express")
 const cors = require("cors")
 const app = express();
 const PORT = process.env.PORT || 5000;
-const URI = "mongodb+srv://damokevo:valorantstab32@mernapp1.4rgj6.mongodb.net/MERNapp1?retryWrites=true&w=majority";
+const URI = "mongodb+srv://damokevo:DjeBKMAgYxSMXWos@mernapp1.4rgj6.mongodb.net/MERNapp1?retryWrites=true&w=majority";
 const features = { useNewUrlParser: true, useUnifiedTopology: true }
 export default axios.create({
     baseURL: "http://localhost:5000/",
