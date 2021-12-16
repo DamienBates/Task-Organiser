@@ -6,14 +6,14 @@ import axios from 'axios'
 
 interface MyProps { }
 interface MyState {
-  edit: Array<string>,
+  edit: any,
 }
 
 export default class ReadTask extends Component<MyProps, MyState> {
   constructor(props: any) {
     super(props);
-    this.deleteTask = this.deleteTask.bind(this);
     this.state = { edit: [] }
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   componentDidMount() {
@@ -22,31 +22,31 @@ export default class ReadTask extends Component<MyProps, MyState> {
       .then((response) => {
         this.setState({ edit: response.data })
       })
-      .catch((error: string) => {
+      .catch((error: any) => {
         console.log(error)
       })
   }
 
-  deleteTask(id: any) {
-    console.log(id)
+
+  deleteTask = (id: any) => {
+    console.log("edit: ", id)
     axios
-      .delete(`http://localhost:5000/delete-task/${id}`)
+      .delete(`http://localhost:5000/delete-task/` + id)
       .then((response) => {
         console.log(response.data.id);
       })
-      .catch((error: string) => {
+      .catch((error: any) => {
         console.log(error)
       })
 
   }
+
 
   parseArray(arr: any) {
     return arr.map((el: any, index: number) => {
       return ({ id: index + 1, taskName: el.task, commentName: el.comments, priority: el.priority, deleteItem: el._id })
     })
   }
-
-
 
   columns2: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50 },
@@ -59,7 +59,7 @@ export default class ReadTask extends Component<MyProps, MyState> {
       width: 100,
       getActions: () => [
         <GridActionsCellItem icon={<EditIcon />} label='Edit' />,
-        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={this.deleteTask.bind(this)} />
+        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={(event) => this.deleteTask(event)} />
       ]
     },
   ];
@@ -71,7 +71,7 @@ export default class ReadTask extends Component<MyProps, MyState> {
           <DataGrid
             rows={this.parseArray(this.state.edit)}
             columns={this.columns2}
-            sx={{ backgroundColor: '#1a0130', mt: '3.3vh' }}
+            sx={{ backgroundColor: '#290a0a', mt: '3.3vh' }}
             pageSize={10}
             rowsPerPageOptions={[10]}
             checkboxSelection
