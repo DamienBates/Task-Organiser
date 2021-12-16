@@ -20,7 +20,9 @@ export default class ReadTask extends Component<MyProps, MyState> {
     axios
       .get("http://localhost:5000/")
       .then((response) => {
-        this.setState({ edit: response.data })
+        this.setState({
+          edit: response.data
+        })
       })
       .catch((error: any) => {
         console.log(error)
@@ -28,12 +30,12 @@ export default class ReadTask extends Component<MyProps, MyState> {
   }
 
 
-  deleteTask = (id: any) => {
-    console.log("edit: ", id)
+  deleteTask({ id }: any) {
+    console.log(id)
     axios
       .delete(`http://localhost:5000/delete-task/` + id)
       .then((response) => {
-        console.log(response.data.id);
+        console.log(response);
       })
       .catch((error: any) => {
         console.log(error)
@@ -41,15 +43,14 @@ export default class ReadTask extends Component<MyProps, MyState> {
 
   }
 
-
   parseArray(arr: any) {
     return arr.map((el: any, index: number) => {
-      return ({ id: index + 1, taskName: el.task, commentName: el.comments, priority: el.priority, deleteItem: el._id })
+      return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
     })
   }
 
   columns2: GridColumns = [
-    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'id', headerName: 'ID', width: 50, hide: true },
     { field: 'taskName', headerName: 'Task', width: 250, editable: true },
     { field: 'commentName', headerName: 'Comment', width: 300, editable: true },
     { field: 'priority', headerName: 'Priority', width: 100, editable: true },
@@ -57,9 +58,9 @@ export default class ReadTask extends Component<MyProps, MyState> {
       field: 'actions',
       type: 'actions',
       width: 100,
-      getActions: () => [
+      getActions: (userID) => [
         <GridActionsCellItem icon={<EditIcon />} label='Edit' />,
-        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={(event) => this.deleteTask(event)} />
+        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => this.deleteTask(userID)} />
       ]
     },
   ];

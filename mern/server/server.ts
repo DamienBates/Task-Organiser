@@ -81,7 +81,7 @@ app.route('/delete-task/:id').get((req: any, res: any) => {
     const id = req.params.id;
     TasksModel.findByIdAndDelete(id, (err: any, taskDeleted: any) => {
         if (err) {
-            return console.error(err);
+            return console.error(err), res.redirect("/ReadTask")
         }
         else {
             res.status(200).json(`Task: ${taskDeleted.task} was deleted with id: ${id}`)
