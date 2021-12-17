@@ -28,7 +28,7 @@ mongoose.connect(URI, (error: any) => {
 
 // Routes:
 // All Tasks
-app.route('/').get((req: any, res: any) => {
+app.get('/', (req: any, res: any) => {
     TasksModel.find(function (err: any, tasks: any) {
         if (err) {
             console.error(err)
@@ -40,7 +40,7 @@ app.route('/').get((req: any, res: any) => {
 
 // CRUD:
 // Create
-app.route('/add-task').post((req: any, res: any) => {
+app.post('/add-task', (req: any, res: any) => {
     TasksModel.create(req.body, (err: any, tasks: any) => {
         if (err) {
             console.error(err)
@@ -52,7 +52,7 @@ app.route('/add-task').post((req: any, res: any) => {
 })
 
 // Read
-app.route('/see-task/:id').get((req: any, res: any) => {
+app.get('/see-task/:id', (req: any, res: any) => {
     var id = req.params.id;
     TasksModel.findById(id, (err: any, tasks: any) => {
         if (err) {
@@ -64,7 +64,7 @@ app.route('/see-task/:id').get((req: any, res: any) => {
 });
 
 // Update
-app.route('/edit-task/:id').post((req: any, res: any) => {
+app.post('/edit-task/:id', (req: any, res: any) => {
     var id = req.params.id;
     TasksModel.findByIdAndUpdate(id, { $set: req.body }, (err: any, task: any) => {
         if (!task) {
@@ -77,19 +77,15 @@ app.route('/edit-task/:id').post((req: any, res: any) => {
 });
 
 // Delete
-app.route('/delete-task/:id').get((req: any, res: any) => {
+app.delete('/delete-task/:id', (req: any, res: any) => {
     const id = req.params.id;
-    TasksModel.findByIdAndDelete(id, (err: any, taskDeleted: any) => {
+    TasksModel.findByIdAndDelete(id, (err: any) => {
         if (err) {
-            return console.error(err), res.redirect("/ReadTask")
+            return console.error(err)
         }
         else {
-            res.status(200).json(`Task: ${taskDeleted.task} was deleted with id: ${id}`)
+            res.status(200).json(`Task was deleted with id: ${id}`)
         }
     })
 });
-
-// app.delete('/delete-task/:id', async (req: any, res: any)=> {
-//     const id = req.params.id
-// })
 

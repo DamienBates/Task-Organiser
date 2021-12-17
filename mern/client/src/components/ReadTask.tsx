@@ -43,6 +43,7 @@ export default class ReadTask extends Component<MyProps, MyState> {
 
   }
 
+
   parseArray(arr: any) {
     return arr.map((el: any, index: number) => {
       return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
@@ -60,7 +61,7 @@ export default class ReadTask extends Component<MyProps, MyState> {
       width: 100,
       getActions: (userID) => [
         <GridActionsCellItem icon={<EditIcon />} label='Edit' />,
-        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => this.deleteTask(userID)} />
+        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => this.deleteTask(userID)} href='ReadTask' />
       ]
     },
   ];
