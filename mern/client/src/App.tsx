@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import CreateTask from "./components/CreateTask";
 import ReadTask from "./components/ReadTask";
 import { ThemeProvider } from "@emotion/react";
-import CustomTheme from "./components/CustomTheme";
+import CustomTheme from "./CustomTheme";
 
 const App = () => {
   return (

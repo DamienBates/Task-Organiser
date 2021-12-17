@@ -1,56 +1,33 @@
 import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import axios from 'axios'
 
-interface MyProps { }
-interface MyState {
-  edit: any,
-}
+const URL = 'http://localhost:5000/';
 
-export default class ReadTask extends Component<MyProps, MyState> {
-  constructor(props: any) {
-    super(props);
-    this.state = { edit: [] }
-    this.deleteTask = this.deleteTask.bind(this);
-  }
+export default function ReadTask() {
+  const [edit, editSetter] = useState([])
 
-  componentDidMount() {
+  //Get task list
+  useEffect(() => {
     axios
-      .get("http://localhost:5000/")
-      .then((response) => {
-        this.setState({
-          edit: response.data
-        })
-      })
-      .catch((error: any) => {
-        console.log(error)
-      })
-  }
+      .get(URL)
+      .catch((err) => { console.error(err) })
+      .then((res: any) => {
+        editSetter(res.data)
+      });
+  }, [])
 
-
-  deleteTask({ id }: any) {
+  const deleteTask = ({ id }: any) => {
     console.log(id)
     axios
-      .delete(`http://localhost:5000/delete-task/` + id)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error: any) => {
-        console.log(error)
-      })
-
+      .delete(`${URL}delete-task/${id}`)
+      .then((response) => { console.log(response) })
+      .catch((error: any) => { console.log(error) })
   }
 
-
-  parseArray(arr: any) {
-    return arr.map((el: any, index: number) => {
-      return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
-    })
-  }
-
-  columns2: GridColumns = [
+  const columns2: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50, hide: true },
     { field: 'taskName', headerName: 'Task', width: 250, editable: true },
     { field: 'commentName', headerName: 'Comment', width: 300, editable: true },
@@ -61,26 +38,31 @@ export default class ReadTask extends Component<MyProps, MyState> {
       width: 100,
       getActions: (userID) => [
         <GridActionsCellItem icon={<EditIcon />} label='Edit' />,
-        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => this.deleteTask(userID)} href='ReadTask' />
+        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => deleteTask(userID)} href="/ReadTask" />
       ]
     },
   ];
 
-  render() {
-    return (
-      <section>
-        <div style={{ height: 600, width: '100%' }}>
-          <DataGrid
-            rows={this.parseArray(this.state.edit)}
-            columns={this.columns2}
-            sx={{ backgroundColor: '#290a0a', mt: '3.3vh' }}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            checkboxSelection
-            disableSelectionOnClick
-          />
-        </div>
-      </section>
-    );
-  };
+  // Maps the array so that we can embed it in the DataGrid
+  const parseArray = (arr: any) => {
+    return arr.map((el: any, index: number) => {
+      return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
+    })
+  }
+
+  return (
+    <section>
+      <div style={{ height: 600, width: '100%' }}>
+        <DataGrid
+          rows={parseArray(edit)}
+          columns={columns2}
+          sx={{ backgroundColor: '#290a0a', mt: '3.3vh' }}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      </div>
+    </section>
+  );
 };
