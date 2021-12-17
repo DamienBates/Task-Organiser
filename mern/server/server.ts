@@ -51,23 +51,30 @@ app.post('/add-task', (req: any, res: any) => {
     })
 })
 
-// Read
+// Read/Edit
 app.get('/see-task/:id', (req: any, res: any) => {
-    var id = req.params.id;
-    TasksModel.findById(id, (err: any, tasks: any) => {
+    const id = req.params.id;
+    TasksModel.findById(id, (err: any, task: any) => {
         if (err) {
             console.error(err)
         } else {
-            res.json(tasks);
+            res.json(task);
         }
     });
 });
 
 // Update
 app.post('/edit-task/:id', (req: any, res: any) => {
-    var id = req.params.id;
-    TasksModel.findByIdAndUpdate(id, { $set: req.body }, (err: any, task: any) => {
-        if (!task) {
+    const id = req.params.id;
+    const newTasks = {
+        $set: {
+            task: req.body.task,
+            comments: req.body.comments,
+            priority: req.body.priority,
+        }
+    }
+    TasksModel.findByIdAndUpdate(id, newTasks, (err: any, task: any) => {
+        if (err) {
             res.status(404).send(err, "Task not found")
         }
         else {
