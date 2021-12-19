@@ -19,6 +19,7 @@ export default function ReadTask() {
       });
   }, [])
 
+  //Destructure return id into URL - API endpoint delete
   const deleteTask = ({ id }: any) => {
     console.log(id)
     axios
@@ -27,6 +28,7 @@ export default function ReadTask() {
       .catch((error: any) => { console.log(error) })
   }
 
+  //Columns array with getActions
   const columns2: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50, hide: true },
     { field: 'taskName', headerName: 'Task', width: 250, editable: true },
@@ -43,7 +45,7 @@ export default function ReadTask() {
     },
   ];
 
-  // Maps the array so that we can embed it in the DataGrid
+  // Maps the array so that we can embed it in the DataGrid row
   const parseArray = (arr: any) => {
     return arr.map((el: any, index: number) => {
       return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
