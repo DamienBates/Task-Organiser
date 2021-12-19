@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormControlLabel, Radio } from "@mui/material"
+import { Button } from "@mui/material"
 import axios from 'axios'
-import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormControlLabel, Radio } from "@mui/material";
-import SendIcon from '@mui/icons-material/Send';
-import { Button } from "@mui/material";
-
-// interface MyProps { }
-// interface MyState {
-//     id: string,
-//     task: string,
-//     comments: string,
-//     priority: string
-// }
+import SendIcon from '@mui/icons-material/Send'
 
 export default function CreateTaskFunc() {
     const [task, tasksSetter] = useState({ task: '' })
     const [comments, commentsSetter] = useState({ comments: '' })
     const [priority, prioritySetter] = useState({ priority: '' })
-    const { register, handleSubmit, reset } = useForm();
+    const { reset } = useForm()
 
     const handleTasksChange = (e: any) => {
         tasksSetter(e.target.value)
@@ -33,30 +25,25 @@ export default function CreateTaskFunc() {
 
 
     const onSubmit = (e: any) => {
-        e.preventDefault();
-        const payload = { task, comments, priority };
+        // e.preventDefault();
+        const newTask = { task, comments, priority };
 
-        if (payload) {
-            axios
-                .post('http://localhost:5000/add-task', payload)
-                .then((response) => {
-                    console.log(response.data)
-                })
-                .catch((error) => { console.log(error) })
-        }
-        else {
-            console.log('No task information added, sorry!')
-        }
+        axios
+            .post('http://localhost:5000/add-task', newTask)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => { console.error(error) })
 
+        reset({})
     }
 
 
 
-
     return (
-        <>
+        <form onSubmit={onSubmit}>
             <Grid container justifyContent='center'>
-                <FormControl onSubmit={onSubmit}>
+                <FormControl>
                     <Typography
                         sx={{ mt: '4vh', mb: '3vh', fontWeight: 'bold' }}
                         variant="h6"
@@ -96,12 +83,12 @@ export default function CreateTaskFunc() {
                                 <FormControlLabel value='High' control={<Radio />} label="High" />
                             </RadioGroup>
                         </Grid>
-                        <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit' onClick={onSubmit}>
+                        <Button sx={{ mt: '40px' }} variant="contained" endIcon={<SendIcon />} type='submit'>
                             Submit
                         </Button>
                     </Grid>
                 </FormControl>
             </Grid>
-        </>
+        </form>
     );
 }
