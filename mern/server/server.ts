@@ -6,7 +6,7 @@ import cors from 'cors'
 import axios from 'axios'
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const URI = "mongodb+srv://damokevo:DjeBKMAgYxSMXWos@mernapp1.4rgj6.mongodb.net/MERNapp1?retryWrites=true&w=majority";
 export default axios.create({
     baseURL: "http://localhost:5000",

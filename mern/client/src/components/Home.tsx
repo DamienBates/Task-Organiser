@@ -5,7 +5,7 @@ export const Home = () => {
         <Box>
             <Typography paragraph>
                 Create your task using the "Create Task" button at the top right. Indicate urgency
-                and it'll sort with highest priority being at the top.
+                and then select 'Task List' to see your required tasks.
             </Typography>
         </Box>
     )

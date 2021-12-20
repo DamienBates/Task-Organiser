@@ -1,10 +1,9 @@
 import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit'
 import axios from 'axios'
 
-const URL = 'http://localhost:5000/';
+const localURL = 'http://localhost:5000/';
 
 export default function ReadTask() {
   const [edit, editSetter] = useState([])
@@ -12,24 +11,24 @@ export default function ReadTask() {
   //Get task list
   useEffect(() => {
     axios
-      .get(URL)
+      .get(localURL)
       .catch((err) => { console.error(err) })
       .then((res: any) => {
         editSetter(res.data)
       });
   }, [])
 
-  //Destructure return id into URL - API endpoint delete
+  //Destructure Mongo ObjectID into URL and delete
   const deleteTask = ({ id }: any) => {
     console.log(id)
     axios
-      .delete(`${URL}delete-task/${id}`)
+      .delete(`${localURL}delete-task/${id}`)
       .then((response) => { console.log(response) })
-      .catch((error: any) => { console.log(error) })
+      .catch((error: string) => { console.log(error) })
   }
 
-  //Columns array with getActions
-  const columns2: GridColumns = [
+  //Columns array with getActions delete
+  const columns: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50, hide: true },
     { field: 'taskName', headerName: 'Task', width: 250, editable: true },
     { field: 'commentName', headerName: 'Comment', width: 300, editable: true },
@@ -39,13 +38,12 @@ export default function ReadTask() {
       type: 'actions',
       width: 100,
       getActions: (userID) => [
-        <GridActionsCellItem icon={<EditIcon />} label='Edit' />,
         <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => deleteTask(userID)} href="/ReadTask" />
       ]
     },
   ];
 
-  // Maps the array so that we can embed it in the DataGrid row
+  // Maps the array so that we can embed the rows of the DataGrid
   const parseArray = (arr: any) => {
     return arr.map((el: any, index: number) => {
       return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
@@ -57,7 +55,7 @@ export default function ReadTask() {
       <div style={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={parseArray(edit)}
-          columns={columns2}
+          columns={columns}
           sx={{ backgroundColor: '#290a0a', mt: '3.3vh' }}
           pageSize={10}
           rowsPerPageOptions={[10]}
