@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormControlLabel, Radio } from '@mui/material'
 import { Button } from '@mui/material'
 import axios from 'axios'
@@ -9,7 +9,7 @@ export default function CreateTaskFunc() {
     const [comments, commentsSetter] = useState({ comments: '' })
     const [priority, prioritySetter] = useState({ priority: '' })
 
-
+    //Handle state changes from input
     const handleTasksChange = (e: any) => {
         taskSetter(e.target.value)
     }
@@ -22,6 +22,7 @@ export default function CreateTaskFunc() {
         prioritySetter(e.target.value)
     }
 
+    //Submit state changes
     const onSubmit = () => {
         const newTask = { task, comments, priority };
 
@@ -32,10 +33,8 @@ export default function CreateTaskFunc() {
             })
             .catch((error) => { console.error(error) })
 
-        alert('Added to Task List!')
+        alert(`Added to Task List!`)
     }
-
-
 
     return (
         <form onSubmit={onSubmit}>

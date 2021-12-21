@@ -30,9 +30,9 @@ export default function ReadTask() {
   //Columns array with getActions delete
   const columns: GridColumns = [
     { field: 'id', headerName: 'ID', width: 50, hide: true },
-    { field: 'taskName', headerName: 'Task', width: 250, editable: true },
-    { field: 'commentName', headerName: 'Comment', width: 300, editable: true },
-    { field: 'priority', headerName: 'Priority', width: 100, editable: true },
+    { field: 'taskName', headerName: 'Task', width: 320, editable: true },
+    { field: 'commentName', headerName: 'Comment', width: 400, editable: true },
+    { field: 'priority', headerName: 'Priority', width: 150, editable: true },
     {
       field: 'actions',
       type: 'actions',
@@ -52,11 +52,13 @@ export default function ReadTask() {
 
   return (
     <section>
-      <div style={{ height: 600, width: '100%' }}>
+      <div style={{ height: 500, width: '100%' }}>
         <DataGrid
           rows={parseArray(edit)}
           columns={columns}
-          sx={{ backgroundColor: '#290a0a', mt: '3.3vh' }}
+          sx={{
+            backgroundColor: '#290a0a', mt: '3.5vh'
+          }}
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
