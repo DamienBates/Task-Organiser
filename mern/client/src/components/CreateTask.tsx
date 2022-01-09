@@ -33,7 +33,7 @@ export default function CreateTaskFunc() {
             })
             .catch((error) => { console.error(error) })
 
-        alert(`Added to Task List!`)
+        alert('Added to Task List!')
     }
 
     return (

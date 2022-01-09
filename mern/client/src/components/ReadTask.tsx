@@ -43,7 +43,7 @@ export default function ReadTask() {
     },
   ];
 
-  // Maps the array so that we can embed the rows of the DataGrid
+  // Maps the array so that we can embed the rows into the DataGrid
   const parseArray = (arr: any) => {
     return arr.map((el: any, index: number) => {
       return ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
