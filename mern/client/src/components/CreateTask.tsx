@@ -44,7 +44,7 @@ export default function CreateTaskFunc() {
                         sx={{ mt: '4vh', mb: '3vh', fontWeight: 'bold' }}
                         variant='h6'
                     >
-                        Create New Comment
+                        Create New Task
                     </Typography>
                     <Grid>
                         <Grid item>
