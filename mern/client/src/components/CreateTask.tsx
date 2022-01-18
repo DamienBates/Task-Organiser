@@ -5,22 +5,22 @@ import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send'
 
 export default function CreateTaskFunc() {
-    const [task, taskSetter] = useState({ task: '' })
-    const [comments, commentsSetter] = useState({ comments: '' })
-    const [priority, prioritySetter] = useState({ priority: '' })
+    const [task, taskSetter] = useState<{} | string>({ task: '' })
+    const [comments, commentsSetter] = useState<{} | string>({ comments: '' })
+    const [priority, prioritySetter] = useState<{} | string>({ priority: '' })
 
     //Handle state changes from input
-    const handleTasksChange = (e: any) => {
+    const handleTasksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         taskSetter(e.target.value)
-    }
+    };
 
-    const handleCommentsChange = (e: any) => {
+    const handleCommentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         commentsSetter(e.target.value)
-    }
+    };
 
-    const handlePriorityChange = (e: any) => {
+    const handlePriorityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         prioritySetter(e.target.value)
-    }
+    };
 
     //Submit state changes
     const onSubmit = () => {
