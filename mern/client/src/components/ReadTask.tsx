@@ -6,7 +6,7 @@ import axios from 'axios'
 const localURL = 'http://localhost:5000/';
 
 export default function ReadTask() {
-  const [edit, editSetter] = useState([])
+  const [task, taskSetter] = useState([])
 
   //Get task list
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function ReadTask() {
       .get(localURL)
       .catch((err) => { console.error(err) })
       .then((res: any) => {
-        editSetter(res.data)
+        taskSetter(res.data)
       });
   }, [])
 
@@ -54,7 +54,7 @@ export default function ReadTask() {
     <section>
       <div style={{ height: 500, width: '100%' }}>
         <DataGrid
-          rows={parseArray(edit)}
+          rows={parseArray(task)}
           columns={columns}
           sx={{
             backgroundColor: '#290a0a', mt: '3.5vh'
