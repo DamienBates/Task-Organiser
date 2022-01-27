@@ -4,10 +4,21 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import cors from 'cors'
 import axios from 'axios'
+import dotenv from "dotenv"
+dotenv.config()
+
+//dotenv type definitions of environment variables
+declare var process: {
+    env: {
+        MONGO_URI: string,
+        PORT: string,
+    }
+};
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-const URI = "mongodb+srv://damokevo:DjeBKMAgYxSMXWos@MERNapp1.4rgj6.mongodb.net/MERNapp1?retryWrites=true&w=majority";
+const PORT = process.env.PORT;
+const URI = process.env.MONGO_URI;
+
 export default axios.create({
     baseURL: "http://localhost:5000",
     headers: {
@@ -21,15 +32,15 @@ app.use(cors());
 app.listen(PORT);
 
 // Confirm we have a good connection
-mongoose.connect(URI, (error: any) => {
+mongoose.connect(URI, (error) => {
     console.log(`Successfully connected to MongoDB database on port ${PORT}`)
     if (error) throw error;
 });
 
 // Routes:
 // All Tasks
-app.get('/', (req: any, res: any) => {
-    TasksModel.find(function (err: any, tasks: any) {
+app.get('/', (req, res) => {
+    TasksModel.find(function (err, tasks) {
         if (err) {
             console.error(err)
         } else {
@@ -40,8 +51,8 @@ app.get('/', (req: any, res: any) => {
 
 // CRUD:
 // Create
-app.post('/add-task', (req: any, res: any) => {
-    TasksModel.create(req.body, (err: any, tasks: any) => {
+app.post('/add-task', (req, res) => {
+    TasksModel.create(req.body, (err: string, tasks: string) => {
         if (err) {
             console.error(err)
         } else {
@@ -52,9 +63,9 @@ app.post('/add-task', (req: any, res: any) => {
 })
 
 // Read/Edit
-app.get('/see-task/:id', (req: any, res: any) => {
+app.get('/see-task/:id', (req, res) => {
     const id = req.params.id;
-    TasksModel.findById(id, (err: any, task: any) => {
+    TasksModel.findById(id, (err: string, task: string) => {
         if (err) {
             console.error(err)
         } else {
@@ -64,7 +75,8 @@ app.get('/see-task/:id', (req: any, res: any) => {
 });
 
 // Update
-app.post('/edit-task/:id', (req: any, res: any) => {
+// (Unfortunately updating is only local state, server-side persistent of DataGrid updates is available only in commercial-grade DataGridPro from MUI)
+app.post('/edit-task/:id', (req, res) => {
     const id = req.params.id;
     const newTasks = {
         $set: {
@@ -73,9 +85,9 @@ app.post('/edit-task/:id', (req: any, res: any) => {
             priority: req.body.priority,
         }
     }
-    TasksModel.findByIdAndUpdate(id, newTasks, (err: any, task: any) => {
+    TasksModel.findByIdAndUpdate(id, newTasks, (err: string, task: string) => {
         if (err) {
-            res.status(404).send(err, "Task not found")
+            res.status(404).send(err)
         }
         else {
             res.json(task)
@@ -84,9 +96,9 @@ app.post('/edit-task/:id', (req: any, res: any) => {
 });
 
 // Delete
-app.delete('/delete-task/:id', (req: any, res: any) => {
+app.delete('/delete-task/:id', (req, res) => {
     const id = req.params.id;
-    TasksModel.findByIdAndDelete(id, (err: any) => {
+    TasksModel.findByIdAndDelete(id, (err: string) => {
         if (err) {
             return console.error(err)
         }

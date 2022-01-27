@@ -12,12 +12,12 @@ export default function NavBar() {
   return (
     <Box>
       <CssBaseline />
-      <AppBar position='fixed' style={{ padding: '1rem' }}>
+      <AppBar position='fixed' style={{ padding: '0.6rem' }}>
         <Grid display='flex' justifyContent='space-between' alignItems='center'>
           <Typography noWrap component='div'>
             <Link
               to='/'
-              style={{ textDecoration: 'none', color: 'white', fontSize: '18px' }}
+              style={{ textDecoration: 'none', color: 'white', fontSize: '18px', paddingLeft: '10px' }}
             >
               Task Organiser
             </Link>
@@ -29,7 +29,7 @@ export default function NavBar() {
               variant='contained'
             >
               <Typography sx={{ display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex' } }}
-                fontSize='14px'>
+                variant='body2'>
                 Create Task
               </Typography>
             </Button>
@@ -40,7 +40,7 @@ export default function NavBar() {
               style={{ marginLeft: '0.5rem' }}
             >
               <Typography sx={{ display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex' } }}
-                fontSize='14px'>
+                variant='body2'>
                 Task List
               </Typography>
             </Button>

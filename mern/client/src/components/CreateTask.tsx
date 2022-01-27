@@ -39,7 +39,7 @@ export default function CreateTaskFunc() {
             <Grid container justifyContent='center'>
                 <FormControl>
                     <Typography
-                        sx={{ mt: '4vh', mb: '3vh', fontWeight: 'bold' }}
+                        sx={{ mt: '2vh', mb: '3vh', fontWeight: 'bold' }}
                         variant='h6'
                     >
                         Create New Task
