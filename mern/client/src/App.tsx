@@ -1,21 +1,21 @@
 import { Route, Routes } from 'react-router';
 import NavBar from './components/NavBar';
-import Home from './components/Home';
-import CreateTask from './components/CreateTask';
-import ReadTask from './components/ReadTask';
+import HomePage from './components/HomePage'
+import CreateTask from './components/CreateTask'
+import TaskList from './components/TaskList';
 import { ThemeProvider } from '@emotion/react';
 import CustomTheme from './CustomTheme';
 
 const App = () => {
   return (
-    <section>
+    <section style={{ padding: '1rem' }}>
       <ThemeProvider theme={CustomTheme}>
         <NavBar />
-        <div style={{ margin: '3vh' }}>
+        <div style={{}}>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<HomePage />} />
             <Route path='/CreateTask' element={<CreateTask />} />
-            <Route path='/ReadTask' element={<ReadTask />} />
+            <Route path='/TaskList' element={<TaskList />} />
           </Routes>
         </div>
       </ThemeProvider>

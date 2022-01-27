@@ -9,7 +9,6 @@ export default function CreateTaskFunc() {
     const [comments, commentsSetter] = useState<{} | string>({ comments: '' })
     const [priority, prioritySetter] = useState<{} | string>({ priority: '' })
 
-    //Handle state changes from input
     const handleTasksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         taskSetter(e.target.value)
     };
@@ -22,7 +21,6 @@ export default function CreateTaskFunc() {
         prioritySetter(e.target.value)
     };
 
-    //Submit state changes
     const onSubmit = () => {
         const newTask = { task, comments, priority };
 

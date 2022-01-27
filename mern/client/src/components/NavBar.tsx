@@ -6,39 +6,47 @@ import Typography from '@mui/material/Typography';
 import { Grid, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ListAltIcon from '@mui/icons-material/ListAlt';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import CreateIcon from '@mui/icons-material/Create';
 
 export default function NavBar() {
   return (
     <Box>
       <CssBaseline />
-      <AppBar position='fixed'>
-        <Toolbar>
-          <Grid container justifyContent='flex-start'>
-            <Typography variant='h6' noWrap component='div'>
-              <Link style={{ textDecoration: 'none', color: 'white' }} to='/'>Task Organiser</Link>
-            </Typography>
-          </Grid>
-          <Grid container justifyContent='flex-end'>
+      <AppBar position='fixed' style={{ padding: '1rem' }}>
+        <Grid display='flex' justifyContent='space-between' alignItems='center'>
+          <Typography noWrap component='div'>
+            <Link
+              to='/'
+              style={{ textDecoration: 'none', color: 'white', fontSize: '18px' }}
+            >
+              Task Organiser
+            </Link>
+          </Typography>
+          <Box display='inline-flex' justifyContent='flex-end'>
             <Button
-              endIcon={<DirectionsRunIcon />}
+              endIcon={<CreateIcon />}
               href='/CreateTask'
               variant='contained'
             >
-              Create Task
+              <Typography sx={{ display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex' } }}
+                fontSize='14px'>
+                Create Task
+              </Typography>
             </Button>
-            <Grid item sx={{ ml: '2vh' }}>
-              <Button
-                endIcon={<ListAltIcon />}
-                href='/ReadTask'
-                variant='contained'
-              >
+            <Button
+              endIcon={<ListAltIcon />}
+              href='/TaskList'
+              variant='contained'
+              style={{ marginLeft: '0.5rem' }}
+            >
+              <Typography sx={{ display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex' } }}
+                fontSize='14px'>
                 Task List
-              </Button>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
+              </Typography>
+            </Button>
+          </Box>
+        </Grid>
+      </AppBar >
       <Toolbar />
     </Box >
   );
