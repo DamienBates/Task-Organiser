@@ -1,0 +1,21 @@
+{
+  "name": "task-aggregator-mern",
+  "version": "1.0.0",
+  "description": "A task list generator",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x",
+    "yarn": "1.x"
+  },
+  "repository": "https://github.com/DamienBates/Task-Organiser-MERN.git",
+  "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd client && yarn run build",
+    "install-client": "cd client && yarn",
+    "heroku-postbuild": "yarn run install-client && yarn run build",
+    "server": "yarn nodemon server.js",
+    "develop": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start --prefix client\"",
+    "start": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start --prefix client\""
+  }
+}

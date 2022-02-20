@@ -37,18 +37,6 @@ mongoose.connect(URI, (error) => {
     if (error) throw error;
 });
 
-// Path for deployment:
-// Access
-const path = require("path");
-
-// Import front-end build folder
-app.use(express.static(path.resolve(__dirname, "../client/build")));
-
-// && ensure React Router routes work
-app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
-
 // API endpoints:
 // All Tasks
 app.get('/', (req, res) => {
