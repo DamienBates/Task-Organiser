@@ -16,7 +16,7 @@ declare var process: {
 };
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const URI = process.env.MONGO_URI;
 
 export default axios.create({
@@ -37,7 +37,19 @@ mongoose.connect(URI, (error) => {
     if (error) throw error;
 });
 
-// Routes:
+// Path for deployment:
+// Access
+const path = require("path");
+
+// Import front-end build folder
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+// && ensure React Router routes work
+app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
+
+// API endpoints:
 // All Tasks
 app.get('/', (req, res) => {
     TasksModel.find(function (err, tasks) {
