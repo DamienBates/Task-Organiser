@@ -8,7 +8,6 @@ export default function CreateTaskFunc() {
     const [task, taskSetter] = useState<{} | string>({ task: '' })
     const [comments, commentsSetter] = useState<{} | string>({ comments: '' })
     const [priority, prioritySetter] = useState<{} | string>({ priority: '' })
-    const [mounted, isMounted] = useState<boolean>(true) // ensure component is mounted
 
     const handleTasksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         taskSetter(e.target.value)
@@ -31,9 +30,6 @@ export default function CreateTaskFunc() {
             })
             .catch((error) => { console.error(error) })
         alert('Added to Task List!')
-        return () => {
-            isMounted(mounted === false)
-        }
     }
 
     return (
