@@ -11,11 +11,11 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "--prefix client yarn build",
-    "install-client": "yarn --prefix client",
-    "heroku-postbuild": "yarn run install-client && yarn build",
-    "server": "yarn nodemon server.js",
-    "develop": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start --prefix client\"",
-    "start": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start --prefix client\""
-  }
+    "start": "node server",
+    "build": "cd ./mern/client && npm install && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ]
 }
