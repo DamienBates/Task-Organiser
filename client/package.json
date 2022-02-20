@@ -44,13 +44,7 @@
     "yarn": "^1.22.17"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "install-client": "cd client && yarn",
-    "heroku-postbuild": "yarn add install-client && yarn run build",
-    "server": "nodemon server.ts",
-    "build": "cd mern/client && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
