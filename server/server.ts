@@ -4,7 +4,8 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import cors from 'cors'
 import axios from 'axios'
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
+import path from 'path'
 dotenv.config()
 
 //dotenv type definitions of environment variables
@@ -20,7 +21,7 @@ const PORT = process.env.PORT || 5000;
 const URI = process.env.MONGO_URI;
 
 export default axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "",
     headers: {
         "Content-type": "application/json"
     }
@@ -30,6 +31,8 @@ export default axios.create({
 app.use(bodyParser.json());
 app.use(cors());
 app.listen(PORT);
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
 
 // Confirm we have a good connection
 mongoose.connect(URI, (error) => {
