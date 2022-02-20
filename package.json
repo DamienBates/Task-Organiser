@@ -11,9 +11,9 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cd client && yarn run build",
-    "install-client": "cd client && yarn",
-    "heroku-postbuild": "yarn run install-client && yarn run build",
+    "build": "cd mern/client && yarn build",
+    "install-client": "cd mern/client && yarn",
+    "heroku-postbuild": "yarn run install-client && yarn build",
     "server": "yarn nodemon server.js",
     "develop": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start --prefix client\"",
     "start": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start --prefix client\""
