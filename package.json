@@ -12,7 +12,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "build": "cd client && yarn && yarn build"
+    "build": "webpack"
   },
   "cacheDirectories": [
     "node_modules",
