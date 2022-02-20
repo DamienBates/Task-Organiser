@@ -11,8 +11,12 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server",
-    "build": "webpack"
+    "build": "cd client && yarn run build",
+    "install-client": "cd client && yarn install",
+    "heroku-postbuild": "yarn run install-client && yarn run build",
+    "server": "nodemon server.js",
+    "develop": "concurrently --kill-others-on-fail \"yarn run server.ts\" \"yarn run start --prefix client\"",
+    "start": "concurrently --kill-others-on-fail \"yarn run server.ts\" \"yarn run start --prefix client\""
   },
   "cacheDirectories": [
     "node_modules",
