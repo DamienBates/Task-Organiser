@@ -2,6 +2,7 @@
   "name": "task-aggregator-mern",
   "version": "1.0.0",
   "description": "A task list generator",
+  "homepage": ".",
   "engines": {
     "node": "16.x",
     "yarn": "1.x"
