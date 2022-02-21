@@ -13,7 +13,9 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "react-scripts server.ts",
-    "dev": "concurrently \"yarn run server\" \"yarn run start\"",
+    "install-client": "yarn install",
+    "heroku-postbuild": "yarn run install-client && yarn run build",
+    "dev": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start\"",
     "build": "react-scripts build"
   },
   "cacheDirectories": [

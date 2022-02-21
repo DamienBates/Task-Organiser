@@ -13,7 +13,6 @@ declare var process: {
     env: {
         MONGO_URI: string,
         PORT: string,
-        NODE_ENV: string,
     }
 };
 
@@ -25,6 +24,12 @@ const URI = process.env.MONGO_URI;
 app.use(bodyParser.json());
 app.use(cors());
 app.listen(PORT);
+
+app.use(express.static(path.resolve(__dirname, "./build")));
+// Step 2:
+app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "./build", "index.html"));
+});
 
 // Confirm we have a good connection
 mongoose.connect(URI, (error) => {
@@ -43,12 +48,6 @@ app.get('/', (req, res) => {
         }
     })
 })
-
-if (process.env.NODE_ENV === "production") {
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname + '/build/index.html'));
-    });
-}
 
 // CRUD:
 // Create
