@@ -31,8 +31,9 @@ export default axios.create({
 app.use(bodyParser.json());
 app.use(cors());
 app.listen(PORT);
-app.use(express.static(path.resolve(__dirname, "./client/build")));
 
+app.use(express.static(
+    path.join(__dirname, '../client/build')));
 
 // Confirm we have a good connection
 mongoose.connect(URI, (error) => {
