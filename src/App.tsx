@@ -3,8 +3,8 @@ import NavBar from './components/NavBar';
 import HomePage from './components/HomePage'
 import CreateTask from './components/CreateTask'
 import TaskList from './components/TaskList';
-import Box from '@mui/material/Box'
-import { ThemeProvider } from '@emotion/react';
+import { Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import CustomTheme from './CustomTheme';
 
 const App = () => {

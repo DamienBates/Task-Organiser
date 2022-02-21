@@ -2,7 +2,6 @@
   "name": "task-aggregator-mern",
   "version": "1.0.0",
   "description": "A task list generator",
-  "main": "index.js",
   "engines": {
     "node": "16.x",
     "yarn": "1.x"
@@ -11,20 +10,60 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cd ./client && yarn start",
-    "server": "cd ./server && yarn nodemon server.ts",
-    "client": "cd ./client && react-scripts start",
-    "dev": "concurrently \"yarn run server\" \"yarn run ./client\"",
-    "build": "cd ./client && yarn build"
+    "start": "react-scripts start",
+    "server": "react-scripts server.ts",
+    "dev": "concurrently \"yarn run server\" \"yarn run start\"",
+    "build": "react-scripts build"
   },
   "cacheDirectories": [
     "node_modules",
     "react-ui/node_modules"
   ],
   "dependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^4.12.3",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.2",
+    "@mui/x-data-grid": "^5.5.1",
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^17.0.12",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
     "concurrently": "^7.0.0",
+    "connect": "^3.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.2",
     "express": "^4.16.4",
+    "global": "^4.4.0",
+    "mongodb": "^4.2.2",
+    "mongoose": "^6.1.2",
+    "next": "^12.0.7",
     "nodemon": "^2.0.15",
-    "react-scripts": "^5.0.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

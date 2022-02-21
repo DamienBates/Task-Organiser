@@ -8,7 +8,7 @@ import dotenv from 'dotenv'
 import path from 'path'
 dotenv.config()
 
-//dotenv type definitions of environment variables
+//dotenv type definitions for environment variables
 declare var process: {
     env: {
         MONGO_URI: string,
@@ -20,20 +20,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const URI = process.env.MONGO_URI;
 
-export default axios.create({
-    baseURL: "",
-    headers: {
-        "Content-type": "application/json"
-    }
-});
-
 
 app.use(bodyParser.json());
 app.use(cors());
 app.listen(PORT);
 
-app.use(express.static(
-    path.join(__dirname, '../client/build')));
 
 // Confirm we have a good connection
 mongoose.connect(URI, (error) => {
