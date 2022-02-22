@@ -18,10 +18,6 @@
     "dev": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start\"",
     "build": "react-scripts build"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "react-ui/node_modules"
-  ],
   "dependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.5",

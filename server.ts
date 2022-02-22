@@ -3,9 +3,7 @@ import TasksModel from './model'
 import bodyParser from 'body-parser'
 import express from 'express'
 import cors from 'cors'
-import axios from 'axios'
 import dotenv from 'dotenv'
-import path from 'path'
 dotenv.config()
 
 //dotenv type definitions for environment variables
@@ -22,14 +20,12 @@ const URI = process.env.MONGO_URI;
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.json()); // Req as JSON
+app.use(express.static('build')); // Serve static files from 'build' folder
 app.listen(PORT);
 
-app.use(express.static(path.resolve(__dirname, "./build")));
-// Step 2:
-app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "./build", "index.html"));
-});
 
 // Confirm we have a good connection
 mongoose.connect(URI, (error) => {
