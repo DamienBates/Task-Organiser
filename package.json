@@ -17,10 +17,6 @@
     "build": "react-scripts build",
     "tsc": "tsc"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.15",
-    "ts-node": "^10.5.0"
-  },
   "dependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.5",
