@@ -10,12 +10,12 @@ dotenv.config()
 declare var process: {
     env: {
         MONGO_URI: string,
-        PORT: string,
+        SERVER_PORT: string,
     }
 };
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.SERVER_PORT || 5000;
 const URI = process.env.MONGO_URI;
 
 
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json()); // Req as JSON
-app.use(express.static('build')); // Serve static files from 'build' folder
+app.use(express.static(__dirname + 'build')); // Serve static files from 'build' folder
 app.listen(PORT);
 
 
