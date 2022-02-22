@@ -12,9 +12,9 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"react-scripts start\" \"cd ./dist && node server.js\" ",
-    "server": "node ./dist/server.js",
+    "start": "cd ./dist && node server.js\"",
     "build": "react-scripts build",
+    "heroku-postbuild": "yarn && yarn run build",
     "tsc": "tsc"
   },
   "dependencies": {
