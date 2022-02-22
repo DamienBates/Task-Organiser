@@ -1,1 +1,1 @@
-web: bin/boot
+web: node dist/server.js -port 5000
