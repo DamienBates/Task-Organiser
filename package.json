@@ -11,11 +11,10 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "server": "ts-node server.ts",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn start\"",
-    "build": "react-scripts build",
-    "heroku-postbuild": "react-scripts build"
+    "start": "node dist/index.js",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w",
+    "postinstall": "tsc && mv -i -v public dist/ && rm -v -rf src"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
