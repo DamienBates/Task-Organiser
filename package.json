@@ -12,10 +12,9 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cd ./dist && node server.js",
+    "start:server": "cd ./dist && node server.js",
     "build": "react-scripts build",
-    "heroku-postbuild": "yarn && yarn run build",
-    "tsc": "tsc"
+    "start:client": "react-scripts start"
   },
   "dependencies": {
     "@babel/cli": "^7.16.0",

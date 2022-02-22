@@ -11,12 +11,12 @@ dotenv.config()
 declare var process: {
     env: {
         MONGO_URI: string,
-        SERVER_PORT: string,
+        PORT: string,
     }
 };
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const URI = process.env.MONGO_URI;
 
 

@@ -12,7 +12,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const PORT = process.env.SERVER_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const URI = process.env.MONGO_URI;
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -21,7 +21,7 @@ app.use(express_1.default.json()); // Req as JSON
 app.listen(PORT);
 app.use(express_1.default.static(path_1.default.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path_1.default.join(__dirname, '..', 'build'));
 });
 // Confirm we have a good connection
 mongoose_1.default.connect(URI, (error) => {
