@@ -12,13 +12,14 @@
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
-    "server": "nodemon server.ts",
+    "server": "ts-node server.ts",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn start\"",
     "build": "react-scripts build",
     "heroku-postbuild": "react-scripts build"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0"
   },
   "dependencies": {
     "@babel/cli": "^7.16.0",
