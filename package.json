@@ -13,9 +13,9 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "nodemon server.ts",
-    "dev": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run start\"",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn start\"",
     "build": "react-scripts build",
-    "heroku-postbuild": "react-scripts run build"
+    "heroku-postbuild": "react-scripts build"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
