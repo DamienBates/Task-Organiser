@@ -1,1 +1,1 @@
-web: node dist/server.js -port 5000
+web: yarn start
