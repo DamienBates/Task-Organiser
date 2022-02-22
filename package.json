@@ -15,8 +15,7 @@
     "start": "react-scripts start",
     "server": "node ./dist/server.js",
     "build": "react-scripts build",
-    "tsc": "tsc",
-    "postinstall": "tsc && mv -i -v public dist/ && rm -v -rf src"
+    "tsc": "tsc"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
