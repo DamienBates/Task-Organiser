@@ -9,6 +9,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.SERVER_PORT || 5000;
@@ -17,8 +18,11 @@ app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)());
 app.use(express_1.default.json()); // Req as JSON
-app.use(express_1.default.static(__dirname + 'build')); // Serve static files from 'build' folder
 app.listen(PORT);
+app.use(express_1.default.static(path_1.default.join(__dirname, 'build')));
+app.get('/*', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, 'build', 'index.html'));
+});
 // Confirm we have a good connection
 mongoose_1.default.connect(URI, (error) => {
     console.log(`Successfully connected to MongoDB database on port ${PORT}`);
