@@ -5,31 +5,44 @@ import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send'
 
 export default function CreateTaskFunc() {
-    const [task, taskSetter] = useState<{} | string>({ task: '' })
-    const [comments, commentsSetter] = useState<{} | string>({ comments: '' })
-    const [priority, prioritySetter] = useState<{} | string>({ priority: '' })
+    const [task, setTask] = useState<{} | string>({ task: '' })
+    const [comments, setComments] = useState<{} | string>({ comments: '' })
+    const [priority, setPriority] = useState<{} | string>({ priority: '' })
 
     const handleTasksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        taskSetter(e.target.value)
+        setTask(e.target.value)
     };
 
     const handleCommentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        commentsSetter(e.target.value)
+        setComments(e.target.value)
     };
 
     const handlePriorityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        prioritySetter(e.target.value)
+        setPriority(e.target.value)
     };
 
-    const onSubmit = () => {
+    const clearForm = () => {
+        setTask({ task: '' })
+        setComments({ comments: '' })
+        setPriority({ priority: '' })
+    }
+
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const newTask = { task, comments, priority };
-        axios
-            .post('http://localhost:5000/add-task', newTask)
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch((error) => { console.error(error) })
+        e.preventDefault();
+        try {
+            await axios
+                .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, newTask)
+                .then((response: { data: any }) => {
+                    console.log(response.data);
+                })
+                .then(() => { clearForm })
+        } catch (error) {
+            console.error(error)
+        }
+
         alert('Added to Task List!')
+        location.reload();
     }
 
     return (

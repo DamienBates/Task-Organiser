@@ -1,13 +1,10 @@
-import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
-import { useState, useEffect } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid'
+import { useState, useEffect } from 'react'
+import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
-import { Box } from '@mui/material';
-
-const localURL = 'http://localhost:5000/';
+import { Box } from '@mui/material'
 
 export default function ReadTask() {
-
   interface TaskProps {
     task: string,
     comments: string,
@@ -19,7 +16,7 @@ export default function ReadTask() {
   //Get task list
   useEffect(() => {
     axios
-      .get(localURL)
+      .get(`${process.env.REACT_APP_PUBLIC_URL}`)
       .then((response) => {
         setTask(response.data)
       })
@@ -31,12 +28,16 @@ export default function ReadTask() {
   }
 
   //Destructure Mongo ObjectID into URL and delete
-  const deleteTask = ({ id }: DeleteProps) => {
-    console.log(id)
-    axios
-      .delete(`${localURL}delete-task/${id}`)
-      .then((response) => { console.log(response) })
-      .catch((error: string) => { console.log(error) })
+  const deleteTask = async ({ id }: DeleteProps) => {
+    try {
+      await axios
+        .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`)
+        .then((response) => { console.log(response) })
+    } catch (error) {
+      console.log(error)
+    }
+    alert("Task deleted!")
+    location.reload();
   };
 
   const columns: GridColumns = [
@@ -50,7 +51,7 @@ export default function ReadTask() {
       headerName: 'Actions',
       width: 100,
       getActions: (userID) => [
-        <GridActionsCellItem icon={<DeleteIcon />} label='Delete' onClick={() => deleteTask(userID)} href="/TaskList" />
+        <GridActionsCellItem icon={<DeleteIcon />} type="button" label='Delete' onClick={() => deleteTask(userID)} />
       ]
     },
   ];
@@ -65,7 +66,7 @@ export default function ReadTask() {
 
   const parseArray = (arr: any) => (
     arr.map((el: MapProps) =>
-      ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority } as MapProps)
+      ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
     ))
 
   return (
