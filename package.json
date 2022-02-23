@@ -12,9 +12,8 @@
   "author": "DamienBates <80431557+DamienBates@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start:server": "cd ./dist && node server.js",
-    "build": "react-scripts build",
-    "start:client": "react-scripts start"
+    "start:client": "react-scripts start",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@babel/cli": "^7.16.0",
@@ -32,17 +31,9 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "axios": "^0.24.0",
-    "body-parser": "^1.19.1",
-    "concurrently": "^7.0.0",
     "connect": "^3.7.0",
-    "cors": "^2.8.5",
-    "dotenv": "^14.3.2",
-    "express": "^4.16.4",
     "global": "^4.4.0",
-    "mongodb": "^4.2.2",
-    "mongoose": "^6.1.2",
     "next": "^12.0.7",
-    "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^6.2.1",
