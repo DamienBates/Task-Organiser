@@ -21,27 +21,18 @@ export default function CreateTaskFunc() {
         setPriority(e.target.value)
     };
 
-    const clearForm = () => {
-        setTask({ task: '' })
-        setComments({ comments: '' })
-        setPriority({ priority: '' })
-    }
-
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const newTask = { task, comments, priority };
         e.preventDefault();
         try {
             await axios
                 .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, newTask)
-                .then((response: { data: any }) => {
-                    console.log(response.data);
-                })
-                .then(() => { clearForm })
         } catch (error) {
             console.error(error)
         }
 
-        alert('Added to Task List!')
+        alert('Added to Task List!');
+
         location.reload();
     }
 

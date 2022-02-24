@@ -32,9 +32,8 @@ export default function ReadTask() {
     try {
       await axios
         .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`)
-        .then((response) => { console.log(response) })
     } catch (error) {
-      console.log(error)
+      alert("There was an error, try again!")
     }
     alert("Task deleted!")
     location.reload();
