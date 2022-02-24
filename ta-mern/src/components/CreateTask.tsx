@@ -3,11 +3,13 @@ import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormCo
 import { Button } from '@mui/material'
 import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send'
+import { LoadingButton } from '@mui/lab'
 
 export default function CreateTaskFunc() {
     const [task, setTask] = useState<{} | string>({ task: '' })
     const [comments, setComments] = useState<{} | string>({ comments: '' })
     const [priority, setPriority] = useState<{} | string>({ priority: '' })
+    const [submitted, setSubmitted] = useState<boolean>(false)
 
     const handleTasksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTask(e.target.value)
@@ -22,8 +24,11 @@ export default function CreateTaskFunc() {
     };
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const newTask = { task, comments, priority };
-        e.preventDefault();
+        e.preventDefault()
+        setSubmitted(true)
+
+        const newTask = { task, comments, priority }
+
         try {
             await axios
                 .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, newTask)
@@ -32,7 +37,6 @@ export default function CreateTaskFunc() {
         }
 
         alert('Added to Task List!');
-
         location.reload();
     }
 
@@ -81,9 +85,25 @@ export default function CreateTaskFunc() {
                                 <FormControlLabel value='High' control={<Radio />} label='High' />
                             </RadioGroup>
                         </Grid>
-                        <Button sx={{ mt: '40px' }} variant='contained' endIcon={<SendIcon />} type='submit' >
-                            Submit
-                        </Button>
+                        {submitted ? // ternary operator to replace button with LoadingButton onSubmit (preventing multiple submits)
+                            <LoadingButton
+                                loading
+                                loadingPosition="end"
+                                variant='contained'
+                                sx={{
+                                    mt: '40px',
+                                    pl: '1rem',
+                                    pr: '2.5rem'
+                                }}
+                                disabled
+                            >
+                                Saving
+                            </LoadingButton>
+                            :
+                            <Button sx={{ mt: '40px' }} variant='contained' endIcon={<SendIcon />} type='submit'>
+                                Submit
+                            </Button>
+                        }
                     </Grid>
                 </FormControl>
             </Grid>
