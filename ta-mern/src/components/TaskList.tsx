@@ -2,23 +2,28 @@ import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid'
 import { useState, useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 export default function ReadTask() {
+  const [task, setTask] = useState<[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  // Loading is defined to tell spinner when it is allowed to stop
+
   interface TaskProps {
     task: string,
     comments: string,
     priority: string,
   }
 
-  const [task, setTask] = useState<[]>([])
-
-  //Get task list
+  // Get task list
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_PUBLIC_URL}`)
       .then((response) => {
         setTask(response.data)
+      })
+      .then(() => {
+        setLoading(false)
       })
       .catch((err) => { console.error(err) })
   }, []);
@@ -27,7 +32,7 @@ export default function ReadTask() {
     id: string | {},
   }
 
-  //Destructure Mongo ObjectID into URL and delete
+  // Destructure Mongo ObjectID into URL and delete
   const deleteTask = async ({ id }: DeleteProps) => {
     try {
       await axios
@@ -35,7 +40,7 @@ export default function ReadTask() {
     } catch (error) {
       alert("There was an error, try again!")
     }
-    alert("Task deleted!")
+
     location.reload();
   };
 
@@ -66,7 +71,8 @@ export default function ReadTask() {
   const parseArray = (arr: any) => (
     arr.map((el: MapProps) =>
       ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
-    ))
+    )
+  )
 
   return (
     <Box>
@@ -74,6 +80,16 @@ export default function ReadTask() {
         <DataGrid
           rows={parseArray(task)}
           columns={columns}
+          components={{
+            // Change the text if no tasks are found as per Mui docs
+            NoRowsOverlay: () => {
+              return (
+                <Box style={{ display: 'grid', justifyContent: 'center', alignContent: 'center', height: '100vh', opacity: '0.9', padding: '1rem' }}>
+                  <Typography>Sorry! No tasks found 😔</Typography>
+                </Box>
+              )
+            }
+          }}
           sx={{
             backgroundColor: '#290a0a', mt: '1vh'
           }}
@@ -81,8 +97,9 @@ export default function ReadTask() {
           rowsPerPageOptions={[10]}
           checkboxSelection
           disableSelectionOnClick
+          loading={loading}
         />
       </Box>
     </Box>
-  );
+  )
 };
