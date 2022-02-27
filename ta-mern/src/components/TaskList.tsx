@@ -13,9 +13,9 @@ export default function ReadTask() {
     task: string,
     comments: string,
     priority: string,
-  }
+  };
 
-  // Get task list
+  // Retrieve task list
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_PUBLIC_URL}`)
@@ -30,7 +30,7 @@ export default function ReadTask() {
 
   interface DeleteProps {
     id: string | {},
-  }
+  };
 
   // Destructure Mongo ObjectID into URL and delete
   const deleteTask = async ({ id }: DeleteProps) => {
@@ -72,7 +72,7 @@ export default function ReadTask() {
     arr.map((el: MapProps) =>
       ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
     )
-  )
+  );
 
   return (
     <Box>
@@ -81,7 +81,7 @@ export default function ReadTask() {
           rows={parseArray(task)}
           columns={columns}
           components={{
-            // Change the text if no tasks are found as per Mui docs
+            // Change the text if no tasks found, as per Mui docs:
             NoRowsOverlay: () => {
               return (
                 <Box style={{ display: 'grid', justifyContent: 'center', alignContent: 'center', height: '100vh', opacity: '0.9', padding: '1rem' }}>
