@@ -12,35 +12,39 @@ export default function NavBar() {
   return (
     <Box>
       <CssBaseline />
-      <AppBar position='fixed' style={{ padding: '0.6rem' }}>
+      <AppBar position='fixed' style={{ padding: '0.5rem' }}>
         <Grid display='flex' justifyContent='space-between' alignItems='center'>
           <Typography noWrap component='div'>
             <Link
               to='/'
-              style={{ textDecoration: 'none', color: 'white', fontSize: '18px', paddingLeft: '10px' }}
+              style={{
+                textDecoration: 'none',
+                color: 'white',
+                paddingLeft: '6px',
+              }}
+
             >
               Task Organiser
             </Link>
           </Typography>
-          <Box display='inline-flex' justifyContent='flex-end'>
+          <Box display='flex' justifyContent='end'>
             <Button
               endIcon={<CreateIcon />}
               href='/CreateTask'
               variant='contained'
+              style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
             >
-              <Typography sx={{ display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex' } }}
-                variant='body2'>
-                Create Task
+              <Typography variant='body2' sx={{ fontSize: { sm: 14, xs: 0 } }}>
+                Add Task
               </Typography>
             </Button>
             <Button
               endIcon={<ListAltIcon />}
               href='/TaskList'
               variant='contained'
-              style={{ marginLeft: '0.5rem' }}
+              style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
             >
-              <Typography sx={{ display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex' } }}
-                variant='body2'>
+              <Typography variant='body2' sx={{ fontSize: { sm: 14, xs: 0 } }}>
                 Task List
               </Typography>
             </Button>
