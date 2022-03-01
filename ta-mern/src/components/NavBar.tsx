@@ -34,7 +34,7 @@ export default function NavBar() {
               variant='contained'
               style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
             >
-              <Typography variant='body2' sx={{ fontSize: { sm: 14, xs: 0 } }}>
+              <Typography variant='body2' sx={{ display: { xs: 'none', sm: 'flex' } }}>
                 Add Task
               </Typography>
             </Button>
@@ -44,7 +44,7 @@ export default function NavBar() {
               variant='contained'
               style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
             >
-              <Typography variant='body2' sx={{ fontSize: { sm: 14, xs: 0 } }}>
+              <Typography variant='body2' sx={{ display: { xs: 'none', sm: 'flex' } }}>
                 Task List
               </Typography>
             </Button>

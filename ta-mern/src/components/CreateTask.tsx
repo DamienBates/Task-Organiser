@@ -25,13 +25,14 @@ export default function CreateTaskFunc() {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setSubmitted(true)
 
-        const newTask = { task, comments, priority }
+        setSubmitted(true) // Handle submission early to disable button to prevent multiple submissions
+
+        const payload = { task, comments, priority }
 
         try {
             await axios
-                .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, newTask)
+                .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, payload)
         } catch (error) {
             console.error(error)
         }
@@ -42,7 +43,7 @@ export default function CreateTaskFunc() {
 
     return (
         <form onSubmit={onSubmit}>
-            <Grid container justifyContent='center'>
+            <Grid container justifyContent='center' padding='0.8rem'>
                 <FormControl>
                     <Typography
                         sx={{ mt: '2vh', mb: '3vh', fontWeight: 'bold' }}
