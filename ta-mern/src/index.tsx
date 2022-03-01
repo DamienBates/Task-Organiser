@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import NavBar from './components/NavBar';
-import HomePage from './components/HomePage'
+import Home from './components/Home'
 import CreateTask from './components/CreateTask'
 import TaskList from './components/TaskList';
 import { Box } from '@mui/material';
@@ -16,7 +16,7 @@ const App = () => {
       <ThemeProvider theme={CustomTheme}>
         <NavBar />
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<Home />} />
           <Route path='/CreateTask' element={<CreateTask />} />
           <Route path='/TaskList' element={<TaskList />} />
         </Routes>
