@@ -12,7 +12,7 @@ import CustomTheme from './CustomTheme';
 
 const App = () => {
   return (
-    <Box style={{ padding: '1rem' }}>
+    <Box>
       <ThemeProvider theme={CustomTheme}>
         <NavBar />
         <Routes>

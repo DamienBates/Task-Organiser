@@ -76,7 +76,7 @@ export default function ReadTask() {
 
   return (
     <Box>
-      <Box style={{ height: 500, width: 'auto' }}>
+      <Box style={{ height: 500, width: 'auto', padding: '10px' }}>
         <DataGrid
           rows={parseArray(task)}
           columns={columns}
