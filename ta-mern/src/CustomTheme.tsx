@@ -5,8 +5,8 @@ const CustomTheme = createTheme({
         type: 'dark',
         primary: {
             light: '#fff',
-            main: '#802020',
-            dark: '#002884',
+            main: '#610a0a',
+            dark: '#750404',
             contrastText: '#fff',
         },
         secondary: {
