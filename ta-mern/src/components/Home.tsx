@@ -1,6 +1,6 @@
 import { Box, Typography } from '@material-ui/core'
 
-export const Home = () => {
+export default function Home() {
     return (
         <Box>
             <Typography paragraph style={{ paddingLeft: '1rem', paddingTop: '0.8rem' }}>
@@ -10,5 +10,3 @@ export const Home = () => {
         </Box>
     )
 }
-
-export default Home
