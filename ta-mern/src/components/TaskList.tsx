@@ -1,13 +1,12 @@
-import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid'
-import { useState, useEffect } from 'react'
-import DeleteIcon from '@mui/icons-material/Delete'
-import axios from 'axios'
-import { Box, Typography } from '@mui/material'
+import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
+import { useState, useEffect } from 'react';
+import { Box, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
 
 export default function ReadTask() {
   const [task, setTask] = useState<[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  // Loading is defined to tell spinner when it is allowed to stop
 
   interface TaskProps {
     task: string,
