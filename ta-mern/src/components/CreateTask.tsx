@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { TextField, Typography, FormControl, Grid, RadioGroup, FormLabel, FormControlLabel, Radio } from '@mui/material'
-import { Button } from '@mui/material'
+import { TextField, FormControl, RadioGroup, FormLabel, FormControlLabel } from '@mui/material'
+import { Button, Typography, Grid, Radio } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send'
-import { LoadingButton } from '@mui/lab'
 
 export default function CreateTaskFunc() {
     const [task, setTask] = useState<{} | string>({ task: '' })
@@ -11,34 +11,33 @@ export default function CreateTaskFunc() {
     const [priority, setPriority] = useState<{} | string>({ priority: '' })
     const [submitted, setSubmitted] = useState<boolean>(false)
 
-    const handleTasksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    function handleTasksChange(e: React.ChangeEvent<HTMLInputElement>) {
         setTask(e.target.value)
     };
 
-    const handleCommentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    function handleCommentsChange(e: React.ChangeEvent<HTMLInputElement>) {
         setComments(e.target.value)
     };
 
-    const handlePriorityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    function handlePriorityChange(e: React.ChangeEvent<HTMLInputElement>) {
         setPriority(e.target.value)
     };
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-
-        setSubmitted(true) // Handle submission early to disable button to prevent multiple submissions
+        setSubmitted(true) // Disables button to prevent multiple submissions
 
         const payload = { task, comments, priority }
 
         try {
             await axios
                 .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, payload)
+                .then(() => { alert('Added to Task List!') })
+                .then(() => { location.reload() })
         } catch (error) {
             console.error(error)
         }
 
-        alert('Added to Task List!');
-        location.reload();
     }
 
     return (
