@@ -15,17 +15,25 @@ export default function ReadTask() {
     priority: string,
   };
 
-  // Retrieve task list
+  // Get task list
+  async function fetchTasks() {
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_PUBLIC_URL}`)
+        .then((response) => {
+          setTask(response.data)
+        })
+        .then(() => {
+          setLoading(false)
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  // Retrieve task list once on page load
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_PUBLIC_URL}`)
-      .then((response) => {
-        setTask(response.data)
-      })
-      .then(() => {
-        setLoading(false)
-      })
-      .catch((err) => { console.error(err) })
+    fetchTasks();
   }, []);
 
   interface DeleteProps {
@@ -33,7 +41,7 @@ export default function ReadTask() {
   };
 
   // Destructure Mongo ObjectID into URL and delete
-  const deleteTask = async ({ id }: DeleteProps) => {
+  async function deleteTask({ id }: DeleteProps) {
     try {
       await axios
         .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`)
@@ -68,11 +76,12 @@ export default function ReadTask() {
     commentName: string,
   };
 
-  const parseArray = (arr: any) => (
-    arr.map((el: MapProps) =>
-      ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
-    )
-  );
+  function parseArray(arr: any) {
+    return (
+      arr.map((el: MapProps) =>
+        ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
+      ))
+  };
 
   return (
     <Box>
@@ -88,7 +97,7 @@ export default function ReadTask() {
           rows={parseArray(task)}
           columns={columns}
           components={{
-            // Change the text if no tasks found, as per Mui docs:
+            // Change the text if no tasks are found, as per Mui docs:
             NoRowsOverlay: () => {
               return (
                 <Box style={{ display: 'grid', justifyContent: 'center', alignContent: 'center', height: '100vh', opacity: '0.9', padding: '1rem' }}>
