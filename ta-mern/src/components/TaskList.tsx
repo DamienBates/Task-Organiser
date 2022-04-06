@@ -75,7 +75,7 @@ export default function ReadTask() {
     commentName: string,
   };
 
-  function parseArray(arr: any) {
+  function parseArray(arr: []) {
     return (
       arr.map((el: MapProps) =>
         ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
