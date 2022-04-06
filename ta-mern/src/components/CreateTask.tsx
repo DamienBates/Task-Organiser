@@ -38,7 +38,7 @@ export default function CreateTaskFunc() {
             console.error(error)
         }
 
-    }
+    };
 
     return (
         <form onSubmit={onSubmit}>
@@ -108,5 +108,5 @@ export default function CreateTaskFunc() {
                 </FormControl>
             </Grid>
         </form>
-    );
-}
+    )
+};

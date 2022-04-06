@@ -48,5 +48,5 @@ export default function NavBar() {
       </AppBar >
       <Toolbar />
     </Box >
-  );
-}
+  )
+};
