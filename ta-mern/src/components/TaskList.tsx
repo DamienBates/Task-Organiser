@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 export default function ReadTask() {
-  const [task, setTask] = useState<[]>([])
+  const [retrievedTask, setRetrievedTask] = useState<[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
   interface TaskProps {
@@ -20,7 +20,7 @@ export default function ReadTask() {
       await axios
         .get(`${process.env.REACT_APP_PUBLIC_URL}`)
         .then((response) => {
-          setTask(response.data)
+          setRetrievedTask(response.data)
         })
         .then(() => {
           setLoading(false)
@@ -93,7 +93,7 @@ export default function ReadTask() {
         justifyContent: 'center'
       }}>
         <DataGrid
-          rows={parseArray(task)}
+          rows={parseArray(retrievedTask)}
           columns={columns}
           components={{
             // Change the text if no tasks are found, as per Mui docs:
