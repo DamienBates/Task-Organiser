@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { TextField, FormControl, RadioGroup, FormLabel, FormControlLabel } from '@mui/material'
 import { Button, Typography, Grid, Radio } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
@@ -11,18 +11,6 @@ export default function CreateTaskFunc() {
     const [priority, setPriority] = useState<{} | string>({ priority: '' })
     const [submitted, setSubmitted] = useState<boolean>(false)
 
-    function handleTasksChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setTask(e.target.value)
-    };
-
-    function handleCommentsChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setComments(e.target.value)
-    };
-
-    function handlePriorityChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setPriority(e.target.value)
-    };
-
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setSubmitted(true) // Disables button to prevent multiple submissions
@@ -33,11 +21,13 @@ export default function CreateTaskFunc() {
             await axios
                 .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, payload)
                 .then(() => { alert('Added to Task List!') })
-                .then(() => { location.reload() })
+                .then(() => {
+                    setSubmitted(false)
+                    location.reload()
+                })
         } catch (error) {
             console.error(error)
         }
-
     };
 
     return (
@@ -58,7 +48,9 @@ export default function CreateTaskFunc() {
                                 label='Task'
                                 variant='filled'
                                 color='secondary'
-                                onChange={handleTasksChange}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    return setTask(e.target.value)
+                                }}
                             >
                             </TextField>
                         </Grid>
@@ -69,7 +61,9 @@ export default function CreateTaskFunc() {
                                 label='Comments'
                                 variant='filled'
                                 color='secondary'
-                                onChange={handleCommentsChange}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    return setComments(e.target.value)
+                                }}
                             >
                             </TextField>
                         </Grid>
@@ -77,7 +71,9 @@ export default function CreateTaskFunc() {
                             <FormLabel component='legend' color='secondary' sx={{ mb: '8px' }}>Priority:</FormLabel>
                             <RadioGroup
                                 aria-label='Experience'
-                                onChange={handlePriorityChange}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    return setPriority(e.target.value)
+                                }}
 
                             >
                                 <FormControlLabel value='Low' control={<Radio />} label='Low' />
@@ -85,22 +81,29 @@ export default function CreateTaskFunc() {
                                 <FormControlLabel value='High' control={<Radio />} label='High' />
                             </RadioGroup>
                         </Grid>
-                        {submitted ? // ternary operator to replace button with LoadingButton onSubmit (preventing multiple submits)
+                        {submitted ? // ternary operator prevents multiple submits
                             <LoadingButton
                                 loading
                                 loadingPosition="end"
+                                endIcon={<SendIcon />}
                                 variant='contained'
                                 sx={{
                                     mt: '40px',
-                                    pl: '1rem',
-                                    pr: '2.5rem'
+                                    pl: '15px',
+                                    pr: '20px',
+
                                 }}
                                 disabled
                             >
                                 Saving
                             </LoadingButton>
                             :
-                            <Button sx={{ mt: '40px' }} variant='contained' endIcon={<SendIcon />} type='submit'>
+                            <Button
+                                sx={{ mt: '40px' }}
+                                variant='contained'
+                                endIcon={<SendIcon />}
+                                type='submit'
+                            >
                                 Submit
                             </Button>
                         }
