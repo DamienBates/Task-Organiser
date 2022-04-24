@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { TextField, FormControl, RadioGroup, FormLabel, FormControlLabel } from '@mui/material'
+import { TextField, FormControl, RadioGroup, FormLabel, FormControlLabel, Box } from '@mui/material'
 import { Button, Typography, Grid, Radio } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import axios from 'axios'
@@ -20,7 +20,9 @@ export default function CreateTaskFunc() {
         try {
             await axios
                 .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, payload)
-                .then(() => { alert('Added to Task List!') })
+                .then(() => {
+                    alert('Added to Task List!')
+                })
                 .then(() => {
                     setSubmitted(false)
                     location.reload()
@@ -34,72 +36,66 @@ export default function CreateTaskFunc() {
         <form onSubmit={onSubmit}>
             <Grid container justifyContent='center' padding='0.8rem'>
                 <FormControl>
-                    <Typography
-                        sx={{ mt: '2vh', mb: '3vh', fontWeight: 'bold' }}
-                        variant='h6'
-                    >
-                        Create New Task
-                    </Typography>
-                    <Grid>
-                        <Grid item>
-                            <TextField
-                                required
-                                id='outlined-basic'
-                                label='Task'
-                                variant='filled'
-                                color='secondary'
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    return setTask(e.target.value)
-                                }}
-                            >
-                            </TextField>
-                        </Grid>
-                        <Grid item sx={{ mt: '20px' }}>
-                            <TextField
-                                required
-                                id='outlined-basic'
-                                label='Comments'
-                                variant='filled'
-                                color='secondary'
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    return setComments(e.target.value)
-                                }}
-                            >
-                            </TextField>
-                        </Grid>
-                        <Grid item sx={{ mt: '40px' }}>
-                            <FormLabel component='legend' color='secondary' sx={{ mb: '8px' }}>Priority:</FormLabel>
-                            <RadioGroup
-                                aria-label='Experience'
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    return setPriority(e.target.value)
-                                }}
+                    <Grid paddingTop="2rem">
+                        <Box>
+                            <Grid item>
+                                <TextField
+                                    required
+                                    id='outlined-basic'
+                                    label='Task'
+                                    variant='filled'
+                                    color='secondary'
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        return setTask(e.target.value)
+                                    }}
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid item sx={{ mt: '20px' }}>
+                                <TextField
+                                    required
+                                    id='outlined-basic'
+                                    label='Comments'
+                                    variant='filled'
+                                    color='secondary'
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        return setComments(e.target.value)
+                                    }}
+                                >
+                                </TextField>
+                            </Grid>
+                        </Box>
+                        <Box>
+                            <Grid item sx={{ mt: '40px' }}>
+                                <FormLabel component='legend' color='secondary' sx={{ mb: '8px' }}>Priority:</FormLabel>
+                                <RadioGroup
+                                    aria-required={true}
+                                    aria-label='Experience'
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        return setPriority(e.target.value)
+                                    }}
 
-                            >
-                                <FormControlLabel value='Low' control={<Radio />} label='Low' />
-                                <FormControlLabel value='Medium' control={<Radio />} label='Medium' />
-                                <FormControlLabel value='High' control={<Radio />} label='High' />
-                            </RadioGroup>
-                        </Grid>
+                                >
+                                    <FormControlLabel value='Low' control={<Radio />} label='Low' />
+                                    <FormControlLabel value='Medium' control={<Radio />} label='Medium' />
+                                    <FormControlLabel value='High' control={<Radio />} label='High' />
+                                </RadioGroup>
+                            </Grid>
+                        </Box>
                         {submitted ? // ternary operator prevents multiple submits
                             <LoadingButton
+                                sx={{ mt: '20px' }}
                                 loading
                                 loadingPosition="end"
                                 endIcon={<SendIcon />}
                                 variant='contained'
-                                sx={{
-                                    mt: '40px',
-                                    pl: '15px',
-                                    pr: '20px',
-
-                                }}
                                 disabled
                             >
                                 Saving
                             </LoadingButton>
                             :
                             <Button
-                                sx={{ mt: '40px' }}
+                                sx={{ mt: '20px' }}
                                 variant='contained'
                                 endIcon={<SendIcon />}
                                 type='submit'
