@@ -7,7 +7,12 @@ export default function NavBar() {
   return (
     <Box>
       <CssBaseline />
-      <AppBar position='fixed' style={{ padding: '0.5rem' }}>
+      <AppBar
+        elevation={1}
+        position='fixed'
+        style={{
+          padding: '0.5rem',
+        }}>
         <Grid display='flex' justifyContent='space-between' alignItems='center'>
           <Typography noWrap component='div'>
             <Link
@@ -23,26 +28,36 @@ export default function NavBar() {
             </Link>
           </Typography>
           <Box display='flex' justifyContent='end'>
-            <Button
-              endIcon={<CreateIcon />}
-              href='/CreateTask'
-              variant='contained'
-              style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
-            >
-              <Typography variant='body2' sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                Add Task
-              </Typography>
-            </Button>
-            <Button
-              endIcon={<ListAltIcon />}
-              href='/TaskList'
-              variant='contained'
-              style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
-            >
-              <Typography variant='body2' sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                Task List
-              </Typography>
-            </Button>
+            <Link
+              to="/CreateTask"
+              style={{
+                textDecoration: 'none'
+              }}>
+              <Button
+                endIcon={<CreateIcon />}
+                variant='contained'
+                style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
+              >
+                <Typography variant='body2' sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                  Task List
+                </Typography>
+              </Button>
+            </Link>
+            <Link
+              to="/TaskList"
+              style={{
+                textDecoration: 'none'
+              }}>
+              <Button
+                endIcon={<ListAltIcon />}
+                variant='contained'
+                style={{ display: 'inline-flex', justifyContent: 'initial', marginLeft: '0.5rem' }}
+              >
+                <Typography variant='body2' sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                  Task List
+                </Typography>
+              </Button>
+            </Link>
           </Box>
         </Grid>
       </AppBar >
