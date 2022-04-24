@@ -1,12 +1,17 @@
 import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, Key } from 'react';
 import { Box, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import CreateTask from './CreateTask';
+import { TaskContext } from '../TaskContext';
 
 export default function ReadTask() {
-  const [retrievedTask, setRetrievedTask] = useState<[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [deleting, setDeleting] = useState<boolean>(false);
+
+  // Global state
+  const { globalTasks, setGlobalTasks } = useContext(TaskContext)
 
   interface TaskProps {
     task: string,
@@ -16,11 +21,13 @@ export default function ReadTask() {
 
   // Get task list
   async function fetchTasks() {
+    setLoading(true);
+
     try {
       await axios
         .get(`${process.env.REACT_APP_PUBLIC_URL}`)
         .then((response) => {
-          setRetrievedTask(response.data)
+          setGlobalTasks(response.data)
         })
         .then(() => {
           setLoading(false)
@@ -32,7 +39,9 @@ export default function ReadTask() {
 
   // Retrieve task list once on page load
   useEffect(() => {
-    fetchTasks();
+    if (globalTasks.length === 0) {
+      fetchTasks();
+    }
   }, []);
 
   interface DeleteProps {
@@ -41,14 +50,18 @@ export default function ReadTask() {
 
   // Destructure Mongo ObjectID into URL and delete
   async function deleteTask({ id }: DeleteProps) {
+    setDeleting(true);
+
     try {
       await axios
         .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`)
+        .then(() => {
+          setDeleting(false);
+          location.reload();
+        })
     } catch (error) {
-      alert("There was an error, try again!")
+      console.error(error)
     }
-
-    location.reload();
   };
 
   const columns: GridColumns = [
@@ -62,7 +75,13 @@ export default function ReadTask() {
       headerName: 'Actions',
       width: 100,
       getActions: (userID) => [
-        <GridActionsCellItem icon={<DeleteIcon />} type="button" label='Delete' onClick={() => deleteTask(userID)} />
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          type="button"
+          label='Delete'
+          disabled={deleting === false ? false : true}
+          onClick={() => deleteTask(userID)}
+        />
       ]
     },
   ];
@@ -87,26 +106,32 @@ export default function ReadTask() {
       <Box style={{
         height: 530,
         width: '100%',
-        paddingLeft: '1.2rem',
-        paddingRight: '1.2rem',
+        padding: '1rem',
         display: 'flex',
         justifyContent: 'center'
       }}>
         <DataGrid
-          rows={parseArray(retrievedTask)}
+          rows={parseArray(globalTasks)}
           columns={columns}
           components={{
             // Change the text if no tasks are found, as per Mui docs:
             NoRowsOverlay: () => {
               return (
-                <Box style={{ display: 'grid', justifyContent: 'center', alignContent: 'center', height: '100vh', opacity: '0.9', padding: '1rem' }}>
+                <Box style={{
+                  display: 'grid',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  height: '100%',
+                  opacity: '0.9',
+                  padding: '1rem'
+                }}>
                   <Typography>Sorry! No tasks found 😔</Typography>
                 </Box>
               )
             }
           }}
           sx={{
-            backgroundColor: '#290a0a', mt: '1vh'
+            backgroundColor: '#290a0a',
           }}
           pageSize={10}
           rowsPerPageOptions={[10]}
