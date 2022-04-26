@@ -1,18 +1,18 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from "@mui/material";
 
 const CustomTheme = createTheme({
     palette: {
-        type: 'dark',
+        mode: 'dark',
         primary: {
             light: '#fff',
-            main: '#610a0a',
-            dark: '#750404',
+            main: '#fff', // Initial button colour
+            dark: '#fff', // onHover
             contrastText: '#fff',
         },
         secondary: {
             light: '#ff7961',
             main: '#fff',
-            dark: '#ba000d',
+            dark: '#000',
             contrastText: '#000',
         },
     },
