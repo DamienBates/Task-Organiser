@@ -1,36 +1,39 @@
 import { Route, Routes } from 'react-router';
-import { Box } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
 import { TaskContext } from './TaskContext';
 import { useMemo, useState } from 'react';
-import NavBar from './components/NavBar';
+import CreateTask from './components/CreateTask';
 import Home from './components/Home'
 import TaskList from './components/TaskList';
 import CustomTheme from './CustomTheme';
-import CreateTask from './components/CreateTask';
+import DrawerComponent from './components/NavDrawer';
 
 function App() {
-    const [search, setSearch] = useState<string>(""); // SearchValue sent up by children components
     const [globalTasks, setGlobalTasks] = useState<Array<any>>([]);
+    const [submitted, setSubmitted] = useState<boolean>(false);
 
-    const taskContext = useMemo(() => ({
-        search,
-        setSearch,
+    const memoisedContext = useMemo(() => ({
+        submitted,
+        setSubmitted,
         globalTasks,
         setGlobalTasks
-    }), [search, globalTasks])
+    }), [submitted, globalTasks])
 
     return (
         <Box>
             <ThemeProvider theme={CustomTheme}>
-                <NavBar />
-                <TaskContext.Provider value={taskContext}>
-                    <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/TaskList' element={<TaskList />} />
-                        <Route path='/CreateTask' element={<CreateTask />} />
-                    </Routes>
-                </TaskContext.Provider>
+                <CssBaseline />
+                <DrawerComponent />
+                <Box paddingLeft="65px" style={{
+                }}>
+                    <TaskContext.Provider value={memoisedContext}>
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/CreateTask' element={<CreateTask />} />
+                        </Routes>
+                    </TaskContext.Provider>
+                </Box>
             </ThemeProvider>
         </Box>
     );
