@@ -1,3 +1,4 @@
+import { Create, HomeOutlined } from "@mui/icons-material"
 import { Typography } from "@mui/material"
 import { Box } from "@mui/system"
 
@@ -5,15 +6,15 @@ export default function Home() {
     return (
         <Box style={{
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "94vh"
         }}>
-            <Typography
-                paragraph
-                style={{
-                    padding: "1rem"
-                }}
-            >
-                Welcome to my task organiser, hope you enjoy your stay.
+            <Typography style={{ paddingBottom: '45px' }}>
+                Welcome to my task organiser, I hope you enjoy your stay.
+            </Typography>
+            <Typography>
+                Feel free to add, organise, edit and sort tasks to your liking.
             </Typography>
         </Box>
     )
