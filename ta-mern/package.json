@@ -27,7 +27,7 @@
     "@mui/lab": "^5.0.0-alpha.70",
     "@mui/material": "^5.6.3",
     "@mui/system": "^5.2.8",
-    "@mui/x-data-grid": "^5.5.1",
+    "@mui/x-data-grid": "^5.10.0",
     "@mui/x-date-pickers": "^5.0.0-alpha.2",
     "@types/axios": "^0.14.0",
     "@types/cors": "^2.8.12",
