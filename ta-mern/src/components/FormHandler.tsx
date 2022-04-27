@@ -38,7 +38,7 @@ export default function FormHandler() {
         <form onSubmit={onSubmit}>
             <Grid container
                 display="inline-flex"
-                padding="12px 20px 15px 48px"
+                padding="20px 20px 15px 0px"
             >
                 <Grid item pb="10px" ml="25px">
                     <TextField
