@@ -1,4 +1,4 @@
-import { Home, Create, ListAlt } from "@mui/icons-material";
+import { Home, Create } from "@mui/icons-material";
 import { Box, ClickAwayListener, Drawer, ListItem } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -24,7 +24,7 @@ function DrawerComponent() {
                     icon={<Home />}
                 />
                 <ListItemComponent
-                    to="/CreateTask"
+                    to="/TaskList"
                     icon={<Create />}
                 />
             </ListItem>
