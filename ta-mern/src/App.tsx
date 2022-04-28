@@ -39,7 +39,7 @@ function App() {
 
         try {
             await axios
-                .get(`${process.env.REACT_APP_PUBLIC_URL}`)
+                .get(`${process.env.REACT_APP_PUBLIC_URL}`, { timeout: 5000 })
                 .then((response) => {
                     setApiReturn(response.data)
                     setLoading(false);
@@ -53,6 +53,10 @@ function App() {
     useEffect(() => {
         fetchTasks();
     }, []);
+
+    useEffect(() => {
+        fetchTasks();
+    }, [edited]);
 
     useEffect(() => {
         if (loading === true) {
