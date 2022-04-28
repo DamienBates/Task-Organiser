@@ -27,9 +27,11 @@ export default function ReadTask() {
   };
 
   async function updateTask(id: string, task: string, comments: string, priority: string) {
+    // Fetch on submission, which will update with POST request
     await axios
       .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`, { timeout: 5000 })
       .then(() => {
+        // Second fetch only triggers if initial fetch doesn't update task list
         fetchTasks();
       })
       .catch((error) => {
@@ -41,7 +43,6 @@ export default function ReadTask() {
     // Post when all fields are filled
     if (edited.task !== "" && edited.comments && "" || edited.priority !== "") {
       updateTask(id, edited.task, edited.comments, edited.priority)
-      fetchTasks();
     }
   }), [edited]);
 
