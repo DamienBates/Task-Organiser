@@ -7,7 +7,7 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            height: "94vh"
+            height: "93vh"
         }}>
             <Typography style={{ paddingBottom: '45px' }}>
                 Welcome to my task organiser, I hope you enjoy your stay.
