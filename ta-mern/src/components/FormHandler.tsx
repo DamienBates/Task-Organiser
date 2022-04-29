@@ -49,7 +49,6 @@ export default function FormHandler() {
             >
                 <Grid item pb="10px" ml="25px">
                     <TextField
-                        required
                         label="What needs to be done?"
                         variant="standard"
                         color="secondary"
@@ -60,7 +59,6 @@ export default function FormHandler() {
                 </Grid>
                 <Grid item pb="10px" ml="25px">
                     <TextField
-                        required
                         label="Any notes?"
                         variant="standard"
                         color="secondary"
@@ -101,6 +99,9 @@ export default function FormHandler() {
                         :
                         <Button
                             sx={{ mt: "15px", ml: "25px" }}
+                            disabled={todo.task !== "" && todo.comments !== "" && todo.priority != "" ?
+                                false : true
+                            }
                             variant="outlined"
                             type="submit"
                         >
