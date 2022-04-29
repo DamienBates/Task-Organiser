@@ -45,7 +45,7 @@ export default function FormHandler() {
         <form onSubmit={onSubmit}>
             <Grid container
                 display="inline-flex"
-                padding="3vh 4vw 2vw 0"
+                padding="2vh 4vw 1.5vw 0"
             >
                 <Grid item pb="10px" ml="25px">
                     <TextField
@@ -111,7 +111,7 @@ export default function FormHandler() {
             </Grid>
             <Box>
                 <TaskList />
-                <Typography fontSize={"10px"} pl="20px"
+                <Typography fontSize={"10px"} pl="20px" pb="5px"
                     style={{ opacity: "0.8" }}>
                     Note: Cells can be edited.
                 </Typography>
