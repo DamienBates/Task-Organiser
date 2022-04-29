@@ -103,28 +103,32 @@ export default function ReadTask() {
           onCellEditCommit={(returned: any) => {
             setId(returned.id);
 
+            const taskEdit = apiReturn[0].task
+            const commentEdit = apiReturn[0].comments
+            const priorityEdit = apiReturn[0].priority
+
             switch (returned.field) {
               case 'taskName':
                 setEdited({
                   ...edited,
                   task: returned.value,
-                  comments: returned.row.commentName,
-                  priority: returned.row.priority
+                  comments: commentEdit,
+                  priority: priorityEdit
                 })
                 break;
               case 'commentName':
                 setEdited({
                   ...edited,
-                  task: returned.row.taskName,
+                  task: taskEdit,
                   comments: returned.value,
-                  priority: returned.row.priority
+                  priority: priorityEdit
                 })
                 break;
               case 'priority':
                 setEdited({
                   ...edited,
-                  task: returned.row.taskName,
-                  comments: returned.row.commentName,
+                  task: taskEdit,
+                  comments: commentEdit,
                   priority: returned.value
                 })
                 break;
