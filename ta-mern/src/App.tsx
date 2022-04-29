@@ -55,10 +55,6 @@ function App() {
     }, []);
 
     useEffect(() => {
-        fetchTasks();
-    }, [edited]);
-
-    useEffect(() => {
         if (loading === true) {
             fetchTasks();
         }
