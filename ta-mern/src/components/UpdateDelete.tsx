@@ -16,12 +16,14 @@ export default function ReadTask() {
 
   // Destructure Mongo ObjectID into URL and delete
   async function deleteTask({ id }: CrudProps) {
+    fetchTasks();
+
     await axios
       .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`, { timeout: 5000 })
       .then(() => {
         fetchTasks();
       })
-      .catch((error) => {
+      .catch(() => {
         console.log("Deleting didn't work, please try again")
       })
   };
@@ -30,21 +32,10 @@ export default function ReadTask() {
     // Fetch on submission, which will update with POST request
     await axios
       .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`, { timeout: 5000 })
-      .then(() => {
-        // Second fetch only triggers if initial fetch doesn't update task list
-        fetchTasks();
-      })
-      .catch((error) => {
+      .catch(() => {
         console.log("Couldn't update task, please try again!")
       })
   }
-
-  useEffect((() => {
-    // Post when all fields are filled
-    if (edited.task !== "" && edited.comments && "" || edited.priority !== "") {
-      updateTask(id, edited.task, edited.comments, edited.priority)
-    }
-  }), [edited]);
 
   const columns: GridColumns = [
     { field: "id", headerName: "ID", width: 5, hide: true },
@@ -64,6 +55,19 @@ export default function ReadTask() {
       ]
     },
   ];
+
+  useEffect((() => {
+    (function (next) {
+      // Check edited tasks on client, and if ready, submit to server
+      if (edited.task !== "", edited.comments !== "", edited.priority !== "") {
+        updateTask(id, edited.task, edited.comments, edited.priority)
+      } next();
+    }
+      // Once submitted, update task list
+      (function () {
+        fetchTasks();
+      }))
+  }), [edited])
 
   return (
     <Box>
