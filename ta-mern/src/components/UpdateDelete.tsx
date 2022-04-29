@@ -4,9 +4,14 @@ import { TaskContext } from "../TaskContext";
 import { GridColumns, DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 export default function ReadTask() {
-  const [id, setId] = useState<string>("")
+  // Local
+  const [deleting, setDeleting] = useState<boolean>(false);
+  const [id, setId] = useState<string>("");
+
+  // Global
   const { apiReturn, loading, fetchTasks, edited, setEdited } = useContext(TaskContext);
 
   // CRUD (Edit, Delete) Operations:
@@ -16,10 +21,13 @@ export default function ReadTask() {
 
   // Destructure Mongo ObjectID into URL and delete
   async function deleteTask({ id }: CrudProps) {
-    fetchTasks();
+    setDeleting(true);
 
     await axios
       .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`, { timeout: 5000 })
+      .then(() => {
+        setDeleting(false);
+      })
       .then(() => {
         fetchTasks();
       })
@@ -45,13 +53,20 @@ export default function ReadTask() {
     {
       field: "actions", type: "actions", headerName: "Actions", width: 100,
       getActions: (userID) => [
-        <GridActionsCellItem
-          icon={<DeleteIcon />}
-          type="button"
-          label="Delete"
-          disabled={loading === false ? false : true}
-          onClick={() => deleteTask(userID)}
-        />
+        loading === deleting ?
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            type="button"
+            label="Delete"
+            disabled={deleting === false ? false : true}
+            onClick={() => deleteTask(userID)}
+          />
+          :
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            disabled
+          />
       ]
     },
   ];
