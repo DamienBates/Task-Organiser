@@ -16,7 +16,7 @@ export default function FormHandler() {
 
 
     // OnSubmit retrieval of tasks on Mongo database
-    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(e: React.ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         setLoading(true);
 
@@ -28,6 +28,13 @@ export default function FormHandler() {
                 })
                 .then(() => {
                     fetchTasks();
+                    e.target.reset();
+                    setTodo({
+                        ...todo,
+                        task: "",
+                        comments: "",
+                        priority: "_"
+                    })
                 })
         } catch (error) {
             console.log("Something went wrong retrieving tasks")
@@ -38,7 +45,7 @@ export default function FormHandler() {
         <form onSubmit={onSubmit}>
             <Grid container
                 display="inline-flex"
-                padding="20px 20px 15px 0px"
+                padding="3vh 4vw 2vw 0"
             >
                 <Grid item pb="10px" ml="25px">
                     <TextField
