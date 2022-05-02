@@ -7,6 +7,7 @@ import axios from "axios";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 export default function ReadTask() {
+export default function UpdateDelete() {
   // Local
   const [deleting, setDeleting] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
