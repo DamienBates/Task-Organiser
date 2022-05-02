@@ -3,16 +3,14 @@ import { Box } from "@mui/system"
 
 export default function Home() {
     return (
-        <Box style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            height: "100vh",
-            paddingBottom: "2.5rem"
-        }}>
-            <Typography style={{ paddingBottom: '48px' }}>
-                Welcome to my task organiser, I hope you enjoy your stay.
-            </Typography>
+        <Box
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "95vh",
+            }}>
             <Typography>
                 Feel free to add, organise, edit and sort tasks to your liking.
             </Typography>
