@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { TaskContext } from "../TaskContext";
 import { GridColumns, DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import { GridColumns, DataGrid, GridActionsCellItem, GridCellEditCommitParams } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import LoadingButton from "@mui/lab/LoadingButton";
