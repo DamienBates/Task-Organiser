@@ -40,7 +40,11 @@ export default function UpdateDelete() {
   async function updateTask(id: string, task: string, comments: string, priority: string) {
     // Fetch on submission, which will update with POST request
     await axios
-      .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`, { timeout: 5000 })
+      .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`,
+        { timeout: 5000 })
+      .then(() => {
+        fetchTasks();
+      })
       .catch(() => {
         console.log("Couldn't update task, please try again!")
       })
@@ -51,6 +55,7 @@ export default function UpdateDelete() {
     { field: "taskName", headerName: "Task", width: 220, editable: true },
     { field: "commentName", headerName: "Comment", width: 220, editable: true },
     { field: "priority", headerName: "Priority", width: 150, editable: true },
+    { field: "priority", headerName: "Priority", width: 120, editable: true },
     {
       field: "actions", type: "actions", headerName: "Actions", width: 100,
       getActions: (userID) => [
@@ -91,6 +96,7 @@ export default function UpdateDelete() {
         height: 500,
         maxWidth: "70vw",
         padding: "0.2rem 30px 8px 20px",
+        padding: "20px 10px 8px 20px",
         display: "flex",
         justifyContent: "center"
       }}>
