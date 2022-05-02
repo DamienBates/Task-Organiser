@@ -65,7 +65,7 @@ function App() {
             <ThemeProvider theme={CustomTheme}>
                 <CssBaseline />
                 <DrawerComponent />
-                <Box paddingLeft="80px">
+                <Box paddingLeft="55px">
                     <TaskContext.Provider value={memoisedContext}>
                         <Routes>
                             <Route path="/" element={<Home />} />
