@@ -84,6 +84,10 @@ export default function UpdateDelete() {
       if (edited.task !== "", edited.comments !== "", edited.priority !== "") {
         updateTask(id, edited.task, edited.comments, edited.priority)
       } next();
+    // Check all values !== ""
+    if (Object.values(edited).every(value => value !== "")) {
+      // Update the task if all non-empty
+      updateTask(id, edited.task, edited.comments, edited.priority);
     }
       // Once submitted, update task list
       (function () {
