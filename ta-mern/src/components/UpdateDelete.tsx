@@ -1,13 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { TaskContext } from "../TaskContext";
-import { GridColumns, DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { GridColumns, DataGrid, GridActionsCellItem, GridCellEditCommitParams } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import LoadingButton from "@mui/lab/LoadingButton";
 
-export default function ReadTask() {
 export default function UpdateDelete() {
   // Local
   const [deleting, setDeleting] = useState<boolean>(false);
@@ -39,7 +36,6 @@ export default function UpdateDelete() {
   };
 
   async function updateTask(id: string, task: string, comments: string, priority: string) {
-    // Fetch on submission, which will update with POST request
     await axios
       .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`,
         { timeout: 5000 })
@@ -55,7 +51,6 @@ export default function UpdateDelete() {
     { field: "id", headerName: "ID", width: 5, hide: true },
     { field: "taskName", headerName: "Task", width: 220, editable: true },
     { field: "commentName", headerName: "Comment", width: 220, editable: true },
-    { field: "priority", headerName: "Priority", width: 150, editable: true },
     { field: "priority", headerName: "Priority", width: 120, editable: true },
     {
       field: "actions", type: "actions", headerName: "Actions", width: 100,
@@ -79,28 +74,17 @@ export default function UpdateDelete() {
   ];
 
   useEffect((() => {
-    (function (next) {
-      // Check edited tasks on client, and if ready, submit to server
-      if (edited.task !== "", edited.comments !== "", edited.priority !== "") {
-        updateTask(id, edited.task, edited.comments, edited.priority)
-      } next();
     // Check all values !== ""
     if (Object.values(edited).every(value => value !== "")) {
       // Update the task if all non-empty
       updateTask(id, edited.task, edited.comments, edited.priority);
     }
-      // Once submitted, update task list
-      (function () {
-        fetchTasks();
-      }))
   }), [edited])
 
   return (
     <Box>
       <Box style={{
-        height: 500,
-        maxWidth: "70vw",
-        padding: "0.2rem 30px 8px 20px",
+        height: "75vh",
         padding: "20px 10px 8px 20px",
         display: "flex",
         justifyContent: "center"
@@ -112,40 +96,41 @@ export default function UpdateDelete() {
           rowsPerPageOptions={[10]}
           checkboxSelection
           disableSelectionOnClick
-          onCellEditCommit={(returned: any) => {
-            setId(returned.id);
+          onCellEditCommit={(cell: any) => {
+            setId(String(cell.id));
+            for (let i = 0; i < apiReturn.length; i++) {
+              if (cell.id === apiReturn[i]._id) {
 
-            const taskEdit = apiReturn[0].task
-            const commentEdit = apiReturn[0].comments
-            const priorityEdit = apiReturn[0].priority
-
-            switch (returned.field) {
-              case 'taskName':
-                setEdited({
-                  ...edited,
-                  task: returned.value,
-                  comments: commentEdit,
-                  priority: priorityEdit
-                })
-                break;
-              case 'commentName':
-                setEdited({
-                  ...edited,
-                  task: taskEdit,
-                  comments: returned.value,
-                  priority: priorityEdit
-                })
-                break;
-              case 'priority':
-                setEdited({
-                  ...edited,
-                  task: taskEdit,
-                  comments: commentEdit,
-                  priority: returned.value
-                })
-                break;
-              default: "None matches that name"
+                switch (cell.field) {
+                  case 'taskName':
+                    setEdited({
+                      ...edited,
+                      task: cell.value,
+                      comments: apiReturn[i].comments,
+                      priority: apiReturn[i].priority
+                    })
+                    break;
+                  case 'commentName':
+                    setEdited({
+                      ...edited,
+                      task: apiReturn[i].task,
+                      comments: cell.value,
+                      priority: apiReturn[i].priority
+                    })
+                    break;
+                  case 'priority':
+                    setEdited({
+                      ...edited,
+                      task: apiReturn[i].task,
+                      comments: apiReturn[i].comments,
+                      priority: cell.value
+                    })
+                    break;
+                  default: "None matches that name"
+                }
+              }
             }
+
           }}
           loading={loading}
           components={{
@@ -188,6 +173,11 @@ interface MapProps extends TaskProps {
 function parseArray(arr: []) {
   return (
     arr.map((el: MapProps) =>
-      ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
+    ({
+      id: el._id,
+      taskName: el.task,
+      commentName: el.comments,
+      priority: el.priority
+    })
     ))
 };
