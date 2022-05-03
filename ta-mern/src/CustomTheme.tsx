@@ -2,18 +2,18 @@ import { createTheme } from "@mui/material";
 
 const CustomTheme = createTheme({
     palette: {
-        mode: 'dark',
+        mode: "dark",
         primary: {
-            light: '#fff',
-            main: '#fff', // Initial button colour
-            dark: '#fff', // onHover
-            contrastText: '#fff',
+            light: "#fff",
+            main: "#fff", // Initial button colour
+            dark: "#fff", // onHover
+            contrastText: "#fff",
         },
         secondary: {
-            light: '#ff7961',
-            main: '#fff',
-            dark: '#000',
-            contrastText: '#000',
+            light: "#ff7961",
+            main: "#fff",
+            dark: "#000",
+            contrastText: "#000",
         },
     },
 });

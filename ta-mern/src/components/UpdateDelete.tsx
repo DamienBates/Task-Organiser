@@ -96,7 +96,7 @@ export default function UpdateDelete() {
               // If cell ID and api fetch match, continue with the shallow copy
               if (cell.id === apiReturn[i]._id) {
                 switch (cell.field) {
-                  case 'taskName':
+                  case "taskName":
                     setEdited({
                       ...edited,
                       task: cell.value,
@@ -104,7 +104,7 @@ export default function UpdateDelete() {
                       priority: apiReturn[i].priority
                     })
                     break;
-                  case 'commentName':
+                  case "commentName":
                     setEdited({
                       ...edited,
                       task: apiReturn[i].task,
@@ -112,7 +112,7 @@ export default function UpdateDelete() {
                       priority: apiReturn[i].priority
                     })
                     break;
-                  case 'priority':
+                  case "priority":
                     setEdited({
                       ...edited,
                       task: apiReturn[i].task,
