@@ -6,19 +6,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
 export default function UpdateDelete() {
-  // Local
   const [deleting, setDeleting] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
 
-  // Global
   const { apiReturn, loading, fetchTasks, edited, setEdited } = useContext(TaskContext);
 
-  // CRUD (Edit, Delete) Operations:
-  type CrudProps = {
-    id: Object;
-  }
-
-  // Destructure Mongo ObjectID into URL and delete
+  // Delete request
   async function deleteTask({ id }: CrudProps) {
     setDeleting(true);
 
@@ -33,6 +26,7 @@ export default function UpdateDelete() {
       })
   };
 
+  // Post request
   async function updateTask(id: string, task: string, comments: string, priority: string) {
     await axios
       .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`,
@@ -95,11 +89,12 @@ export default function UpdateDelete() {
           rowsPerPageOptions={[10]}
           checkboxSelection
           disableSelectionOnClick
-          onCellEditCommit={(cell: any) => {
+          onCellEditCommit={(cell: GridCellEditCommitParams) => {
             setId(String(cell.id));
-            for (let i = 0; i < apiReturn.length; i++) {
-              if (cell.id === apiReturn[i]._id) {
 
+            for (let i = 0; i < apiReturn.length; i++) {
+              // If cell ID and api fetch match, continue with the shallow copy
+              if (cell.id === apiReturn[i]._id) {
                 switch (cell.field) {
                   case 'taskName':
                     setEdited({
@@ -133,7 +128,7 @@ export default function UpdateDelete() {
           }}
           loading={loading}
           components={{
-            // Change the text if no tasks are found, as per Mui docs:
+            // Change the overlay if no tasks are found, as per Mui docs:
             NoRowsOverlay: () => {
               return (
                 <Box style={{
@@ -155,6 +150,10 @@ export default function UpdateDelete() {
   )
 };
 
+type CrudProps = {
+  id: Object;
+}
+
 interface TaskProps {
   task: string,
   comments: string,
@@ -172,11 +171,5 @@ interface MapProps extends TaskProps {
 function parseArray(arr: []) {
   return (
     arr.map((el: MapProps) =>
-    ({
-      id: el._id,
-      taskName: el.task,
-      commentName: el.comments,
-      priority: el.priority
-    })
-    ))
+      ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })))
 };
