@@ -26,8 +26,6 @@ export default function UpdateDelete() {
       .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`, { timeout: 5000 })
       .then(() => {
         setDeleting(false);
-      })
-      .then(() => {
         fetchTasks();
       })
       .catch(() => {
@@ -48,10 +46,6 @@ export default function UpdateDelete() {
   }
 
   const columns: GridColumns = [
-    { field: "id", headerName: "ID", width: 5, hide: true },
-    { field: "taskName", headerName: "Task", width: 220, editable: true },
-    { field: "commentName", headerName: "Comment", width: 220, editable: true },
-    { field: "priority", headerName: "Priority", width: 120, editable: true },
     { field: "id", headerName: "ID", width: 250, hide: true },
     { field: "taskName", headerName: "Task", width: 200, editable: true },
     { field: "commentName", headerName: "Comment", width: 200, editable: true },
@@ -86,15 +80,10 @@ export default function UpdateDelete() {
   }), [edited])
 
   return (
-    <Box>
     <Box style={{
       marginTop: "2rem"
     }}>
       <Box style={{
-        height: "75vh",
-        padding: "20px 10px 8px 20px",
-        display: "flex",
-        justifyContent: "center"
         height: "450px",
         marginLeft: "25px",
         width: "62vw"
