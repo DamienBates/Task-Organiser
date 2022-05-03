@@ -52,6 +52,10 @@ export default function UpdateDelete() {
     { field: "taskName", headerName: "Task", width: 220, editable: true },
     { field: "commentName", headerName: "Comment", width: 220, editable: true },
     { field: "priority", headerName: "Priority", width: 120, editable: true },
+    { field: "id", headerName: "ID", width: 250, hide: true },
+    { field: "taskName", headerName: "Task", width: 200, editable: true },
+    { field: "commentName", headerName: "Comment", width: 200, editable: true },
+    { field: "priority", headerName: "Priority", width: 100, editable: true },
     {
       field: "actions", type: "actions", headerName: "Actions", width: 100,
       getActions: (userID) => [
@@ -83,11 +87,17 @@ export default function UpdateDelete() {
 
   return (
     <Box>
+    <Box style={{
+      marginTop: "2rem"
+    }}>
       <Box style={{
         height: "75vh",
         padding: "20px 10px 8px 20px",
         display: "flex",
         justifyContent: "center"
+        height: "450px",
+        marginLeft: "25px",
+        width: "62vw"
       }}>
         <DataGrid
           rows={parseArray(apiReturn)}
