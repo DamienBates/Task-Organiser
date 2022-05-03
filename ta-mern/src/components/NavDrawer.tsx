@@ -18,6 +18,7 @@ function DrawerComponent() {
                 flexDirection: "column",
                 justifyContent: "center",
                 height: "100vh",
+                width: "45px"
             }}>
                 <ListItemComponent
                     to="/"
@@ -41,21 +42,22 @@ function ListItemComponent({ to, icon }: ListItemProps) {
     const [clicked, setClicked] = useState<boolean>(false);
 
     return (
-        <ClickAwayListener
-            onClickAway={() => setClicked(false)}>
-            <Link to={to}>
-                <Box
-                    onClick={() => setClicked(true)}
-                    style={{
-                        color: clicked === false ?
-                            "#828282" : String(CustomTheme.palette.primary.main),
-                        textDecoration: "none",
-                        paddingBottom: "40px"
-                    }}>
-                    {icon}
-                </Box>
-            </Link>
-        </ClickAwayListener>
+        <Box mb="35px">
+            <ClickAwayListener
+                onClickAway={() => setClicked(false)}>
+                <Link to={to}>
+                    <Box
+                        onClick={() => setClicked(true)}
+                        style={{
+                            color: clicked === false ?
+                                "#828282" : String(CustomTheme.palette.primary.main),
+                            textDecoration: "none",
+                        }}>
+                        {icon}
+                    </Box>
+                </Link>
+            </ClickAwayListener>
+        </Box>
     )
 }
 
