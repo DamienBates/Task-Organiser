@@ -9,7 +9,9 @@ export default function Home() {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "95vh",
+                height: "94vh",
+                paddingRight: "1rem",
+                paddingLeft: "1rem"
             }}>
             <Typography>
                 Feel free to add, organise, edit and sort tasks to your liking.
