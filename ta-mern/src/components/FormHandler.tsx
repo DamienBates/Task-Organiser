@@ -1,18 +1,6 @@
-import { ChangeEvent, useContext, useRef, useState } from "react";
-import {
-    TextField,
-    Box,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    Grid,
-    Typography,
-    Slide,
-    FormControlLabel,
-    Switch
-} from "@mui/material";
+import { ChangeEvent, useContext, useState } from "react";
+import { SelectChangeEvent, Grid, Typography } from "@mui/material";
+import { TextField, Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { TaskContext } from "../TaskContext";
@@ -48,16 +36,16 @@ export default function FormHandler() {
     return (
         <section style={{
             display: "flex",
-            justifyContent: "center",
-            width: "90vw"
+            justifyContent: "center"
         }}>
             <form onSubmit={onSubmit}>
                 <Grid
                     container
                     display="inline-flex"
-                    padding="4vh 4vw 1vw 0"
+                    paddingTop="2rem"
+                    paddingLeft="10px"
                 >
-                    <Grid item pb="10px" pl="25px">
+                    <Grid item ml="20px">
                         <TextField
                             label="What needs to be done?"
                             variant="standard"
@@ -67,7 +55,7 @@ export default function FormHandler() {
                             }}
                         />
                     </Grid>
-                    <Grid item pb="10px" pl="25px">
+                    <Grid item ml="20px">
                         <TextField
                             label="Any notes?"
                             variant="standard"
@@ -77,7 +65,7 @@ export default function FormHandler() {
                             }}
                         />
                     </Grid>
-                    <Grid item pb="10px" pl="25px">
+                    <Grid item ml="20px">
                         <FormControl variant="standard" sx={{ minWidth: 195 }}>
                             <InputLabel>
                                 How urgent?
@@ -106,16 +94,10 @@ export default function FormHandler() {
                             </LoadingButton>
                             :
                             <Button
-                                sx={{
-                                    mt: "15px",
-                                    ml: "25px"
-                                }}
-                                disabled={
-                                    todo.task !== "" || todo.comments !== "" || todo.priority != "" ?
-                                        false : true
-                                }
+                                disabled={Object.values(todo).every(value => value !== "") ? false : true}
                                 variant="outlined"
                                 type="submit"
+                                sx={{ mt: "15px", ml: "25px" }}
                             >
                                 Add
                             </Button>
@@ -123,12 +105,10 @@ export default function FormHandler() {
                     </Grid>
                 </Grid>
                 <Box>
-
                     <UpdateDelete />
-
                     <Typography
                         fontSize={"10px"}
-                        padding={"5px 25px 10px 20px"}
+                        padding={"10px 0 5px 30px"}
                         style={{ opacity: "0.8" }}>
                         Note: Cells can be edited.
                     </Typography>
