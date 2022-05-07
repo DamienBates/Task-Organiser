@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography"
 import { TaskContext } from "../TaskContext";
-import { GridColumns, DataGrid, GridActionsCellItem, GridCellEditCommitParams } from "@mui/x-data-grid";
+import { DataGrid, GridColumns, GridActionsCellItem, GridCellEditCommitParams } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
@@ -41,7 +42,7 @@ export default function UpdateDelete() {
 
   const columns: GridColumns = [
     { field: "id", headerName: "ID", width: 250, hide: true },
-    { field: "taskName", headerName: "Task", width: 200, editable: true },
+    { field: "taskName", headerName: "Task", width: 180, editable: true },
     { field: "commentName", headerName: "Comment", width: 200, editable: true },
     { field: "priority", headerName: "Priority", width: 100, editable: true },
     {
@@ -75,12 +76,14 @@ export default function UpdateDelete() {
 
   return (
     <Box style={{
-      marginTop: "2rem"
+      marginTop: "2.5rem"
     }}>
       <Box style={{
-        height: "450px",
+        height: "70vh",
+        maxHeight: "700px",
         marginLeft: "25px",
-        width: "62vw"
+        width: "62vw",
+        maxWidth: "720px"
       }}>
         <DataGrid
           rows={parseArray(apiReturn)}

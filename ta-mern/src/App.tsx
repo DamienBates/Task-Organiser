@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router";
-import { Box, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 import { TaskContext } from "./TaskContext";
 import { useEffect, useMemo, useState } from "react";
+import Box from "@mui/material/Box"
+import CssBaseline from "@mui/material/CssBaseline";
 import FormHandler from "./components/FormHandler";
 import Home from "./components/Home";
 import CustomTheme from "./CustomTheme";

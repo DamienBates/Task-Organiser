@@ -1,9 +1,16 @@
 import { ChangeEvent, useContext, useState } from "react";
-import { SelectChangeEvent, Grid, Typography } from "@mui/material";
-import { TextField, Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { Button } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { SelectChangeEvent } from "@mui/material";
 import { TaskContext } from "../TaskContext";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography"
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Button from "@mui/material/Button"
+import LoadingButton from "@mui/lab/LoadingButton"
 import UpdateDelete from "./UpdateDelete";
 import axios from "axios"
 
@@ -45,7 +52,7 @@ export default function FormHandler() {
                     paddingTop="2rem"
                     paddingLeft="10px"
                 >
-                    <Grid item ml="20px">
+                    <Grid item ml="20px" pt="15px">
                         <TextField
                             label="What needs to be done?"
                             variant="standard"
@@ -55,7 +62,7 @@ export default function FormHandler() {
                             }}
                         />
                     </Grid>
-                    <Grid item ml="20px">
+                    <Grid item ml="20px" pt="15px">
                         <TextField
                             label="Any notes?"
                             variant="standard"
@@ -65,7 +72,7 @@ export default function FormHandler() {
                             }}
                         />
                     </Grid>
-                    <Grid item ml="20px">
+                    <Grid item ml="20px" pt="15px">
                         <FormControl variant="standard" sx={{ minWidth: 195 }}>
                             <InputLabel>
                                 How urgent?
@@ -88,7 +95,7 @@ export default function FormHandler() {
                                 loading
                                 disabled
                                 variant="contained"
-                                sx={{ mt: "15px", ml: "25px" }}
+                                sx={{ mt: "28px", ml: "25px" }}
                             >
                                 Add
                             </LoadingButton>
@@ -97,7 +104,7 @@ export default function FormHandler() {
                                 disabled={Object.values(todo).every(value => value !== "") ? false : true}
                                 variant="outlined"
                                 type="submit"
-                                sx={{ mt: "15px", ml: "25px" }}
+                                sx={{ mt: "28px", ml: "25px" }}
                             >
                                 Add
                             </Button>
