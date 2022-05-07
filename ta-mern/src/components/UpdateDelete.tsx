@@ -12,7 +12,7 @@ export default function UpdateDelete() {
 
   const { apiReturn, loading, fetchTasks, edited, setEdited } = useContext(TaskContext);
 
-  // Delete request
+  // Delete
   async function deleteTask({ id }: CrudProps) {
     setDeleting(true);
 
@@ -27,7 +27,7 @@ export default function UpdateDelete() {
       })
   };
 
-  // Post request
+  // Update
   async function updateTask(id: string, task: string, comments: string, priority: string) {
     await axios
       .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`,
@@ -69,7 +69,6 @@ export default function UpdateDelete() {
   useEffect((() => {
     // Check all values !== ""
     if (Object.values(edited).every(value => value !== "")) {
-      // Update the task if all non-empty
       updateTask(id, edited.task, edited.comments, edited.priority);
     }
   }), [edited])
