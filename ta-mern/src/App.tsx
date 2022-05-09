@@ -4,10 +4,10 @@ import { TaskContext } from "./TaskContext";
 import { useEffect, useMemo, useState } from "react";
 import Box from "@mui/material/Box"
 import CssBaseline from "@mui/material/CssBaseline";
-import FormHandler from "./components/FormHandler";
-import Home from "./components/Home";
+import FormHandler from "./components/API/Form/Form";
+import Home from "./components/Core UI/Home/Home";
 import CustomTheme from "./CustomTheme";
-import DrawerComponent from "./components/NavDrawer";
+import DrawerComponent from "./components/Core UI/SideBar/SideBar";
 import axios from "axios";
 
 interface ToDoListProps {
