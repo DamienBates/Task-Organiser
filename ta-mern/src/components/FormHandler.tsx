@@ -27,7 +27,7 @@ export default function FormHandler() {
 
         try {
             await axios
-                .post(`${process.env.REACT_APP_PUBLIC_URL}/add-task`, todo)
+                .post(`${process.env.REACT_APP_PUBLIC_URL}`, todo)
                 .then(() => {
                     setLoading(false);
                 })

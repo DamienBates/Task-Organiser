@@ -17,7 +17,7 @@ export default function UpdateDelete() {
     setDeleting(true);
 
     await axios
-      .delete(`${process.env.REACT_APP_PUBLIC_URL}/delete-task/${id}`, { timeout: 5000 })
+      .delete(`${process.env.REACT_APP_PUBLIC_URL}`, { data: { id: `${id}` }, timeout: 5000 })
       .then(() => {
         setDeleting(false);
         fetchTasks();
@@ -30,8 +30,6 @@ export default function UpdateDelete() {
   // Update
   async function updateTask(id: string, task: string, comments: string, priority: string) {
     await axios
-      .post(`${process.env.REACT_APP_PUBLIC_URL}/edit-task/${id}/${task}/${comments}/${priority}`,
-        { timeout: 5000 })
       .then(() => {
         fetchTasks();
       })
