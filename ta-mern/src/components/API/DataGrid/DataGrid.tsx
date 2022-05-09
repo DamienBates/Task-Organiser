@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography"
-import { TaskContext } from "../TaskContext";
+import { TaskContext } from "../../../TaskContext";
 import { DataGrid, GridColumns, GridActionsCellItem, GridCellEditCommitParams } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";

@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { SelectChangeEvent } from "@mui/material";
-import { TaskContext } from "../TaskContext";
+import { TaskContext } from "../../../TaskContext";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField";
@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button"
 import LoadingButton from "@mui/lab/LoadingButton"
-import UpdateDelete from "./UpdateDelete";
+import UpdateDelete from "../DataGrid/DataGrid";
 import axios from "axios"
 
 export default function FormHandler() {

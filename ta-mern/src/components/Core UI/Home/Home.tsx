@@ -1,5 +1,6 @@
-import Typography from "@mui/material/Typography"
-import Box from "@mui/system/Box"
+import Typography from "@mui/material/Typography";
+import React from "react";
+import Box from "@mui/system/Box";
 
 export default function Home() {
     return (
