@@ -42,7 +42,7 @@ function App() {
             await axios
                 .get(`${process.env.REACT_APP_PUBLIC_URL}`, { timeout: 5000 })
                 .then((response) => {
-                    setApiReturn(response.data)
+                    setApiReturn(response.data.tasks)
                     setLoading(false);
                 })
         } catch (error) {
@@ -54,12 +54,6 @@ function App() {
     useEffect(() => {
         fetchTasks();
     }, []);
-
-    useEffect(() => {
-        if (loading === true) {
-            fetchTasks();
-        }
-    }, [loading]);
 
     return (
         <Box>
