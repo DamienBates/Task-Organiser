@@ -30,6 +30,16 @@ export default function UpdateDelete() {
   // Update
   async function updateTask(id: string, task: string, comments: string, priority: string) {
     await axios
+      .patch(`${process.env.REACT_APP_PUBLIC_URL}`,
+        {
+          data: {
+            id: `${id}`,
+            task: `${task}`,
+            comments: `${comments}`,
+            priority: `${priority}`
+          },
+          timeout: 5000
+        })
       .then(() => {
         fetchTasks();
       })
