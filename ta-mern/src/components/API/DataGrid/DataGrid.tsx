@@ -149,7 +149,7 @@ export default function UpdateDelete() {
                   opacity: "0.8",
                   padding: "1rem"
                 }}>
-                  <Typography>Sorry! No tasks found 😔</Typography>
+                  <Typography>No tasks found, feel free to add some!</Typography>
                 </Box>
               )
             }
