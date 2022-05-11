@@ -12,7 +12,7 @@ describe("home page tests", function () {
         expect(Home).toBeDefined();
     });
 
-    test("home page renders without crashing", () => {
+    test("renders without crashing", () => {
         const tree = renderer
             .create(<Home />)
             .toJSON();
