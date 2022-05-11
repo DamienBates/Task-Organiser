@@ -1,9 +1,5 @@
 import Form from "./Form";
-import { render, fireEvent } from '@testing-library/react';
-
-
-
-// Enzyme.configure({ adapter: new Adapter() })
+import { render } from '@testing-library/react';
 
 describe("form", function () {
     test("displays text and form", () => {
