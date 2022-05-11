@@ -13,10 +13,12 @@ import Button from "@mui/material/Button"
 import LoadingButton from "@mui/lab/LoadingButton"
 import UpdateDelete from "../DataGrid/DataGrid";
 import axios from "axios"
+import React from "react";
 
 export default function FormHandler() {
     // Local
     const [loading, setLoading] = useState<boolean>(false); // Local Loading to prevent TaskList spinner
+    const [value, setValue] = useState<string>("");
 
     // Global
     const { todo, setTodo, fetchTasks } = useContext(TaskContext);
@@ -45,7 +47,7 @@ export default function FormHandler() {
             display: "flex",
             justifyContent: "center"
         }}>
-            <form onSubmit={onSubmit}>
+            <form data-test-id="form" onSubmit={onSubmit}>
                 <Grid
                     container
                     display="inline-flex"
@@ -78,8 +80,8 @@ export default function FormHandler() {
                                 How urgent?
                             </InputLabel>
                             <Select
-                                label="Priority"
                                 value={todo.priority}
+                                label="Priority"
                                 onChange={(e: SelectChangeEvent<string>) => {
                                     return setTodo({ ...todo, priority: e.target.value })
                                 }}>
@@ -101,7 +103,6 @@ export default function FormHandler() {
                             </LoadingButton>
                             :
                             <Button
-                                disabled={Object.values(todo).every(value => value !== "") ? false : true}
                                 disabled={loading ? true : false}
                                 variant="outlined"
                                 type="submit"
