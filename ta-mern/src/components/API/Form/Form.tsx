@@ -102,6 +102,7 @@ export default function FormHandler() {
                             :
                             <Button
                                 disabled={Object.values(todo).every(value => value !== "") ? false : true}
+                                disabled={loading ? true : false}
                                 variant="outlined"
                                 type="submit"
                                 sx={{ mt: "28px", ml: "25px" }}

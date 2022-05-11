@@ -76,7 +76,7 @@ export default function UpdateDelete() {
 
   useEffect((() => {
     // Check all values !== ""
-    if (Object.values(edited).every(value => value !== "")) {
+    if (id !== "" && edited.task !== "" && edited.comments !== "" && edited.priority !== "") {
       updateTask(id, edited.task, edited.comments, edited.priority);
     }
   }), [edited])
@@ -180,6 +180,6 @@ interface MapProps extends TaskProps {
 
 function parseArray(arr: []) {
   return (
-    arr.map((el: MapProps) =>
+    arr?.map((el: MapProps) =>
       ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })))
 };
