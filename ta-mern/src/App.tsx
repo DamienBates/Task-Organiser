@@ -26,13 +26,13 @@ function App() {
     const [apiReturn, setApiReturn] = useState<Array<any>>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [todo, setTodo] = useState<ToDoListProps>(todoList)
-    const [edited, setEdited] = useState<ToDoListProps>(todoList)
 
     // Memoised values
     const memoisedContext = useMemo(() => ({
-        todo, setTodo, apiReturn, setApiReturn, edited, setEdited, // Create, Read, & Update Handlers 
+        todo, setTodo,
+        apiReturn, setApiReturn,
         loading, setLoading, fetchTasks
-    }), [edited, todo, apiReturn, loading])
+    }), [todo, apiReturn, loading])
 
     // Retrieve Mongo Tasks
     async function fetchTasks() {
@@ -42,7 +42,7 @@ function App() {
             await axios
                 .get(`${process.env.REACT_APP_PUBLIC_URL}`, { timeout: 5000 })
                 .then((response) => {
-                    setApiReturn(response.data.tasks)
+                    setApiReturn(response.data.tasks);
                     setLoading(false);
                 })
         } catch (error) {
