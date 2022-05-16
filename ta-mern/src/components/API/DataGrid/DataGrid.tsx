@@ -10,7 +10,12 @@ export default function UpdateDelete() {
   const [deleting, setDeleting] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
 
-  const { apiReturn, loading, fetchTasks, edited, setEdited } = useContext(TaskContext);
+  const {
+    todo,
+    setTodo,
+    apiReturn,
+    loading,
+    fetchTasks } = useContext(TaskContext);
 
   // Delete
   async function deleteTask({ id }: CrudProps) {
@@ -19,11 +24,12 @@ export default function UpdateDelete() {
     await axios
       .delete(`${process.env.REACT_APP_PUBLIC_URL}`, { data: { id: `${id}` }, timeout: 5000 })
       .then(() => {
-        setDeleting(false);
         fetchTasks();
+        setDeleting(false);
       })
       .catch(() => {
         console.log("Deleting didn't work, please try again")
+        setDeleting(false);
       })
   };
 
@@ -56,12 +62,12 @@ export default function UpdateDelete() {
     {
       field: "actions", type: "actions", headerName: "Actions", width: 100,
       getActions: (userID) => [
-        loading === deleting ?
+        deleting === false ?
           <GridActionsCellItem
             icon={<DeleteIcon />}
             type="button"
             label="Delete"
-            disabled={deleting === false ? false : true}
+            disabled={false}
             onClick={() => deleteTask(userID)}
           />
           :
@@ -76,10 +82,10 @@ export default function UpdateDelete() {
 
   useEffect((() => {
     // Check all values !== ""
-    if (id !== "" && edited.task !== "" && edited.comments !== "" && edited.priority !== "") {
-      updateTask(id, edited.task, edited.comments, edited.priority);
+    if (id !== "" && todo.task !== "" && todo.comments !== "" && todo.priority !== "") {
+      updateTask(id, todo.task, todo.comments, todo.priority);
     }
-  }), [edited])
+  }), [todo])
 
   return (
     <Box style={{
@@ -93,7 +99,10 @@ export default function UpdateDelete() {
         maxWidth: "720px"
       }}>
         <DataGrid
-          rows={parseArray(apiReturn)}
+          rows={
+            apiReturn?.map((el: MapProps) =>
+              ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })
+            )}
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10]}
@@ -107,24 +116,24 @@ export default function UpdateDelete() {
               if (cell.id === apiReturn[i]._id) {
                 switch (cell.field) {
                   case "taskName":
-                    setEdited({
-                      ...edited,
+                    setTodo({
+                      ...todo,
                       task: cell.value,
                       comments: apiReturn[i].comments,
                       priority: apiReturn[i].priority
                     })
                     break;
                   case "commentName":
-                    setEdited({
-                      ...edited,
+                    setTodo({
+                      ...todo,
                       task: apiReturn[i].task,
                       comments: cell.value,
                       priority: apiReturn[i].priority
                     })
                     break;
                   case "priority":
-                    setEdited({
-                      ...edited,
+                    setTodo({
+                      ...todo,
                       task: apiReturn[i].task,
                       comments: apiReturn[i].comments,
                       priority: cell.value
@@ -176,10 +185,4 @@ interface MapProps extends TaskProps {
   id: number,
   taskName: string,
   commentName: string,
-};
-
-function parseArray(arr: []) {
-  return (
-    arr?.map((el: MapProps) =>
-      ({ id: el._id, taskName: el.task, commentName: el.comments, priority: el.priority })))
 };
