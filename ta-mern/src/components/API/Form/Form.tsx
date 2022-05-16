@@ -18,7 +18,6 @@ import React from "react";
 export default function FormHandler() {
     // Local
     const [loading, setLoading] = useState<boolean>(false); // Local Loading to prevent TaskList spinner
-    const [value, setValue] = useState<string>("");
 
     // Global
     const { todo, setTodo, fetchTasks } = useContext(TaskContext);
@@ -36,7 +35,7 @@ export default function FormHandler() {
                 .then(() => {
                     fetchTasks();
                     e.target.reset();
-                })
+                });
         } catch (error) {
             console.log("Something went wrong retrieving tasks")
         }
