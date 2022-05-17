@@ -9,10 +9,10 @@ describe("DataGrid", function () {
     beforeEach(() => {
         jest.spyOn(React, 'useContext').mockImplementation(() => ({
             todo: {
-                id: "mock",
-                tasks: "mock",
-                comments: "mock",
-                priority: "mock"
+                id: "Datagrid-mock",
+                tasks: "Datagrid-mock",
+                comments: "Datagrid-mock",
+                priority: "Datagrid-mock"
             }
         }));
     });
