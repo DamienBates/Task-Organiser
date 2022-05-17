@@ -1,8 +1,7 @@
-import { screen, render, act, findByTestId } from '@testing-library/react'
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import React from 'react';
-import DataGrid from './DataGrid';
+import { shallow, configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import React from "react";
+import DataGrid from "./DataGrid";
 
 configure({ adapter: new Adapter() });
 
